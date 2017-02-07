@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="ecshop商城开发">
+  <meta name="Description" content="打造商城">
+  <title>Ecshop商城开发产品页</title>
+ <!--引用外部样式-->
+ <link type="text/css" rel="stylesheet"  href="themes/default/style.css">
+ <link type="text/css" rel="stylesheet"  href="themes/default/css/web.css">
+ {insert_scripts files='common.js,compare.js'}
+
+ </head>
+ <body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+
+
+<!--内容推荐开始-->
+<div id="webIntro">
+	<div class="webIntroCon">
+		<!--热点推荐开始-->
+		<div class="hotIntro">
+			<img src="images/webintro.jpg"  class="hotimg"/>
+			<div class="hotList">
+			<!-- #BeginLibraryItem "/library/recommend_best.lbi" --><!-- #EndLibraryItem -->	
+	
+			</div>
+		</div>
+		<!--热点推荐结束-->
+
+		<!--促销活动开始-->
+		<div class="newIntro">
+			<img src="images/commintro.jpg"  class="imgNew" />
+			<ul>
+				<li><a href="">·&nbsp;&nbsp;国际起泡酒节 每天9.9元秒</a></li>
+				<li><a href="">·&nbsp;&nbsp;暑期狂欢游 美酒买一赠一</a></li>
+				<li><a href="">·&nbsp;&nbsp;大牌红酒1元秒</a></li>
+				<li><a href="">·&nbsp;&nbsp;酷爽7月 冰点价低至1折</a></li>
+				<li><a href="">·&nbsp;&nbsp;买酒送酒柜 比39元更低</a></li>
+			</ul>
+		</div>
+		<!--促销活动结束-->
+	</div>
+</div>
+<!--内容推荐结束-->
+
+
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+
+
+
+
+<!--礼物综合搜综分类开始-->
+<div id="searchType">
+	<h3>礼物综合搜索</h3>
+
+ <!--组合搜索 开始-->
+	  <!--{if $brands.1 || $price_grade.1 || $filter_attr_list}-->
+
+<!--{if $brands.1}-->
+	<dl>
+		<dt>{$lang.brand}：</dt>
+		<dd>
+		<!--{foreach from=$brands item=brand}-->
+			<!-- {if $brand.selected} -->
+				<span style="background:red;color:#fff; padding:5px;">{$brand.brand_name}</span>
+			<!-- {else} -->
+				<a href="{$brand.url}">{$brand.brand_name}</a>
+			<!-- {/if} -->
+		<!--{/foreach}-->
+		</dd>
+		<div style="clear:both"></div>
+	</dl>
+	
+<!--{/if}-->	
+
+
+
+<!--{if $price_grade.1}-->
+	<dl>
+		<dt>{$lang.price}：</dt>
+		<dd>
+			<!--{foreach from=$price_grade item=grade}-->
+				<!-- {if $grade.selected} -->
+				<span style="background:red;color:#fff; padding:5px;">{$grade.price_range}</span>
+				<!-- {else} -->
+				<a href="{$grade.url}">{$grade.price_range}</a>
+				<!-- {/if} -->
+			<!--{/foreach}-->
+		</dd><div style="clear:both"></div>
+	</dl>
+<!--{/if}-->	
+	
+	
+	
+<!--{foreach from=$filter_attr_list item=filter_attr}-->	
+	<dl>
+		<dt>{$filter_attr.filter_attr_name|escape:html} :</dt>
+		<dd>
+			<!--{foreach from=$filter_attr.attr_list item=attr}-->
+				<!-- {if $attr.selected} -->
+				<span style="background:red;color:#fff; padding:5px;">{$attr.attr_value}</span>
+				<!-- {else} -->
+				<a href="{$attr.url}">{$attr.attr_value}</a>&nbsp;
+				<!-- {/if} -->
+			<!--{/foreach}-->
+		</dd>
+		<div style="clear:both"></div>
+	</dl>
+<!--{/foreach}-->
+
+
+	
+	  <!-- {/if} -->
+	 <!--组合搜索 结束-->	
+</div>
+
+
+<!--礼物综合搜综分类结束-->
+
+
+<!--商品展示列表-->
+ <!-- #BeginLibraryItem "/library/goods_list.lbi" --><!-- #EndLibraryItem -->
+ <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+  
+
+
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+
+
+
+{insert_scripts files='transport.js'}
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+
+
+<!--
+	1、在News大盒子里面，构建两个一样大小的长方形，一个用来设背景透明，一个利用绝定位，盖在透明
+	图层上面，用来放内容
+	2、利用 h3标签来制作标题部分（颜色，大小，字体类型，竖直居中，首行缩进text-indent:20px;）
+	3、利用 ul来制作新闻列表，文字竖直间距利用行高 line-height:30px;  给 ul添加对应的内边距，使文字与上右下左产生一定的间距。
+	4、给文字加上了 a标签超链接，如何优化我们代码，代码的性能,如果把常用样式，统一初始化，我们选择的是用标签来表达，而不是用 *
+-->
+
+
+
+
+ </body>
+</html>

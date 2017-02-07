@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑"}
+	a{text-decoration:none;color:#fff}
+	ul li{list-style:none}
+
+	#contentbox{width:640px;background:#111;margin:100px auto;position:relative;}
+	#contentbox textarea{width:620px;height:140px;
+		overflow:auto;
+		outline:none;
+		border:1px solid #ccc;
+		padding:10px;
+		font-family:"微软雅黑";
+	}
+
+	#contentbox span.tip{position:absolute;bottom:10px;right:10px}
+	#contentbox span#num{color:green;font-weight:700;padding:0 5px 0 5px;}
+	#commentbox div{background:#ccc;color:#fff;padding:20px;margin-top:10px;}
+  </style>
+ </head>
+ <body>
+  
+
+
+	<div id="contentbox">
+		<textarea id="content" placeholder="请输入评论..." maxLength="500"></textarea>
+		<span class="tip">还可以输入<span id="num" num="500">500</span>个字</span>
+		<a href="javascript:void(0);" onclick="saveComment(this)">提交评论 ctrl+enter</a>
+		<ul id="bqlist">
+			<li text="[微笑]" type="0"><img title="[微笑]" src="http://s9.ui.cn/uiem48/uiem001.svg" style="cursor:pointer; position:relative;"></li>
+			<li text="[憨笑]" type="1"><img title="[憨笑]" src="http://s9.ui.cn/uiem48/uiem002.svg" style="cursor:pointer; position:relative;"></li>
+			<li text="[愉快]" type="2"><img title="[愉快]" src="http://s9.ui.cn/uiem48/uiem003.svg" style="cursor:pointer; position:relative;"></li>
+		</ul>
+	</div>
+	
+
+	<div id="commentbox"></div>
+
+	
+
+
+	<script>
+		function dom(id){
+			return document.getElementById(id);
+		};
+
+		window.onload = function(){
+			//第一步绑定点击事件，onkeyup onkeydown 
+			dom("content").onkeydown=dom("content").onkeyup = changeNum;
+
+			//数字的改变
+			function changeNum(){
+				//2：获取键入的值
+				var value = this.value;
+				var len = value.length;//字符串的长度
+				//3：拿到数字对象
+				var numDom = dom("num");
+				//4：开始递减
+				var num = numDom.getAttribute("num");
+				if(len <=num){
+					numDom.innerHTML = num - len;
+				}else{
+					return false;
+				}
+				//将数据缓存到浏览器中storage中
+				if(value){
+					if(localStorage)localStorage.setItem("message",value);
+				}
+			}
+			
+			//点击标签图片，追加到文本框中
+			kekeDom("bqlist").each(function(){
+				this.onclick = function(){
+					var text = this.getAttribute("text");
+					insertText(dom("content"),text);
+					changeNum.call(dom("content"));
+				};
+			});
+
+			//按键盘的ctrl+enter键盘提交
+			document.onkeydown = function(e){
+				var ev = window.event || e;
+				var code = e.keyCode || e.which;
+				//ev.shiftKey shift键
+				if(ev.ctrlKey && code==13){//回车键 ctrl+enter
+					saveComment();
+				}
+			}
+
+			//数据的缓冲 利用html5 storage
+			if(localStorage){
+				//从缓存中获取数据
+				var html = localStorage.getItem("message");
+				//赋予textarea框
+				if(html){
+					dom("content").innerHTML = html;
+				}
+			}
+
+		};
+
+		var kekeDom = function(id){
+			var childs = dom(id).children;
+			return {
+				each:function(callback){
+					var liDomArr = [].slice.call(childs);	
+					liDomArr.forEach(function(obj,index){
+						callback.call(obj,obj,index);
+					});
+				}
+			};
+		};
+
+		
+		//保存评论
+		function saveComment(){
+			//获取评论的内容
+			var value = dom("content").value.replace(/\[|\]/ig,"#");
+			if(!value){
+				alert("请输入内容...");
+				dom("content").focus();
+				return;
+			}
+			//所有的表情包去对比,和替换
+			kekeDom("bqlist").each(function(){
+				var text = this.getAttribute("text").replace(/\[|\]/ig,"#");
+				var imgHTML = this.innerHTML;
+				var r = new RegExp(text,"igm");
+				value = value.replace(r,imgHTML);
+			});
+			
+			//追加评论
+			dom("commentbox").innerHTML +="<div>"+value+"</div>";
+			//清空评论框
+			dom("content").value = "";
+			//获取焦点
+			dom("content").focus();
+			//数字归500
+			dom("num").innerHTML = 500;
+			//清楚缓存中的数据
+			if(localStorage)localStorage.removeItem("message");
+		};
+
+			
+		//光标处插入文本
+		function insertText(obj,str) {
+			if (document.selection) {
+				var sel = document.selection.createRange();
+				sel.text = str;
+			} else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+				var startPos = obj.selectionStart,
+					endPos = obj.selectionEnd,
+					cursorPos = startPos,
+					tmpStr = obj.value;
+				obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+				cursorPos += str.length;
+				obj.selectionStart = obj.selectionEnd = cursorPos;
+			} else {
+				obj.value += str;
+			}
+		};
+
+		function moveEnd(obj){
+			obj.focus();
+			var len = obj.value.length;
+			if (document.selection) {
+				var sel = obj.createTextRange();
+				sel.moveStart('character',len);
+				sel.collapse();
+				sel.select();
+			} else if (typeof obj.selectionStart == 'number' && typeof obj.selectionEnd == 'number') {
+				obj.selectionStart = obj.selectionEnd = len;
+			}
+		};
+	</script>
+ </body>
+</html>
+
+

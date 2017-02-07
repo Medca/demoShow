@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>潭州学院-keke老师QQ:792185203</title>
+  <link href="tz_animateloading.css" rel="stylesheet"/>
+  <script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="tz_animateloading.js"></script>
+  <style>
+
+	#clickme{width:140px;height:40px;background:green;color:#fff;text-decoration:none;display:inline-block}
+  </style>
+ </head>
+ <body>
+
+	<div id="target1"></div>
+	<div id="target2"></div>
+	<div id="target3"></div>
+	<div id="target4"></div>
+	<div id="target5"></div>
+	<div id="target6"></div>
+	<div id="target7"></div>
+	<div id="target8"></div>
+	<div id="target9"></div>
+	<div id="target10"></div>
+	<div id="target11"></div>
+	<div id="target12"></div>
+
+	<div href="javascript:void(0);" id="clickme">点我</div>
+	<script type="text/javascript">
+		$(function(){
+			for(var i=1;i<=11;i++){
+				$.loading({target:$("#target"+i),mark:i});
+			}
+
+			function loading(target){
+				$.loading({target:target,mark:3,width:20,height:20});
+			};
+				
+			$("#clickme").click(function(){
+				loading($(this));
+			});
+
+			$.loading({target:$("#target12"),mark:4,width:20,height:20})
+			
+		});
+	</script>
+
+	
+ </body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <link href="css/global.css" rel="stylesheet" type="text/css"/>
+  <link href="css/sg.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="js/dialog.js"></script>
+ </head>
+ <body>
+  
+	<a href="javascript:void(0);" onclick="test()">弹出1</a>
+	<a href="javascript:void(0);" onclick="test2()">弹出1</a>
+	<a href="javascript:void(0);" onclick="test3()">弹出1</a>
+	<script type="text/javascript">
+		
+		function test(){
+			$.tzDialog.confirm({title:"删除提示",border:"10px solid #111",background:"green",content:"请输入内容....",overlayClose:true,width:360,height:220,drag:true,callback:function(ok){
+				if(ok){
+					alert("您当前点击的是确定按钮");
+				}else{
+					alert("您当前点击的是关闭按钮");
+				}
+			}});
+		};
+		
+
+		function test2(){
+			$.tzDialog.sure({title:"删除提示",autoHeight:true,content:"请输入内容....",overlayClose:true,width:460,height:220,drag:true,callback:function(ok){
+				if(ok){
+					alert("您当前点击的是确定按钮");
+				}else{
+					alert("您当前点击的是关闭按钮");
+				}
+			}});
+		};
+
+		function test3(){
+			$.tzDialog.alert({title:"删除提示",autoHeight:true,content:"请输入内容....",overlayClose:true,width:560,height:220,drag:true,background:"red",callback:function(ok){
+				if(ok){
+					alert("您当前点击的是确定按钮");
+				}else{
+					alert("您当前点击的是关闭按钮");
+				}
+			}});
+		};
+
+		//函数  dialog
+		//对象  dialog prompt message iframe 动画效果
+		//对象继承，原型链
+		//设计模式
+	</script>
+ </body>
+</html>

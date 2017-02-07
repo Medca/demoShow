@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title>三级省市区联动效果</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+		  </style>
+
+	 </head>
+ <body>
+	<select id="Province"></select>
+	<select id="City" disabled="true"></select><!--disabled禁用 input 元素-->
+	<select id="areas" disabled="true"></select>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	function Province(){
+		var _Province=[{"id":"1","name":"湖北省"},
+					   {"id":"2","name":"湖南省"},
+					   {"id":"3","name":"广东省"}];
+
+		var html = "<option>----请选择---</option>";
+		for(var i=0;i<_Province.length;i++){
+			html += "<option value='"+_Province[i].id+"'>"+_Province[i].name+"</option>";
+		}
+		$("#Province").append(html);
+	};
+	Province();
+
+	
+	//点击省份，给城市赋值
+	var _city={ "1":["101#武汉","102#黄石市","103#十堰市"],
+				"2":["201#株洲","202#长沙","203#郴州"],
+				"3":["301#珠海市","301#汕头市","301#佛山市"]
+			   };
+	$("#Province").change(function(){//第一次点击才有效
+		
+		$("#City").children().remove(); //清除子元素
+		$("#areas").children().remove();
+		$("#areas").attr("disabled",true); 
+		var _index=$(this).val(); //获取序列号  1
+		var CityOption="<option value=''>---请选择城市---</option>";
+		arrCity=_city[_index]; //["株洲","长沙","郴州"]
+		for(var i=0;i<arrCity.length;i++){
+			c=arrCity[i].split("#");
+			CityOption += "<option value='"+c[0]+"'>"+c[1]+"</option>";
+		}
+		$("#City").append(CityOption);
+		$("#City").attr("disabled",false);
+	});
+
+	//点击市，给地区赋值
+	var _areas={ "101":["江岸区","江汉区","硚口区"],
+				 "102":["江岸区","江汉区","硚口区"],
+				 "103":["江岸区","江汉区","硚口区"],
+				 "201":["江岸区","江汉区","硚口区"],
+				 "202":["江岸区","江汉区","硚口区"],
+				 "203":["江岸区","江汉区","硚口区"],
+				 "301":["江岸区","江汉区","硚口区"],
+				 "302":["江岸区","江汉区","硚口区"],
+				 "303":["江岸区","江汉区","硚口区"],
+				};
+	$("#City").change(function(){
+		$("#areas").children().remove(); //清除子元素
+		var _index=$(this).val(); //获取序列号  101
+		var areaOption="<option value=''>---请选择地区---</option>";
+		arrarea=_areas[_index]; //["株洲","长沙","郴州"]
+		for(var i=0;i<arrarea.length;i++){
+			c=arrCity[i].split("#");
+			areaOption += "<option value=''>"+arrarea[i]+"</option>";
+		}
+		$("#areas").append(areaOption);
+		$("#areas").attr("disabled",false);
+	});
+
+	
+</script>
+
+<!--
+1-湖北省
+		1 -101 武汉
+				101 -江岸区
+				101 -江汉区
+				101 -硚口区
+		1 -102 黄石市
+		1 -103 十堰市
+		
+2-湖南省
+		2 -201 株洲
+				201 -天元区
+				201 -芦淞区
+				201 -荷塘区
+				201 -石峰区
+		2 -202 长沙
+		2 -203 郴州
+
+3-广东省
+		3 -301 珠海市
+		3 -302 汕头市
+		3 -303 佛山市
+
+
+-->
+
+
+ </body>
+</html>

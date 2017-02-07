@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>html5+css3</title>
+		<link href="css/anli.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div id="main"></div>
+		 
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/masonry-docs.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		$(function() {
+		    var $main = $('#main');
+		    var html = "";
+		    var dataInt = {
+		    	'dataSrc':[
+		    		{'src':'web/H5/05/05/index_3.html'},
+		    		{'src':'web/H5/07/dome/slide.html'},
+		    		{'src':'web/H5/14/14/animation/index2.html'},
+		    		{'src':'web/H5/14/14/transition/index.html'},
+		    		{'src':'web/index/index.html'},
+		    		{'src':'web/H5/16/16/index.html'},
+		    		{'src':'web/H5/手机相册.html'},
+		    		{'src':'demo/CanvasNight.html'},
+		    		{'src':'web/admin（bootstrap）/blog.html'},
+		    		{'src':'web/admin（bootstrap）/admin/index.html'},
+		    		{'src':'web/H5/xm/ke_dome/index.html'},
+		    		{'src':'web/H5/xm/coffee_home/static/index.html'},
+		    		{'src':'web/H5/smultron/index.html'}
+		    	],
+		    	'dataTitle':[
+		    		{"tit":'拖放API'},
+		    		{"tit":'手机滑动事件'},
+		    		{"tit":'八边形'},
+		    		{"tit":'3d盒子'},
+		    		{"tit":'ifarm框架'},
+		    		{"tit":'响应式网站'},
+		    		{"tit":'手机相册'},
+		    		{"tit":' Canvas璀璨星空图'},
+		    		{"tit":'blog(bootstrap)'},
+		    		{"tit":'项目：网站后台管理(bootstrap)'},
+		    		{"tit":'项目：移动端潭州课程'},
+		    		{"tit":'项目：移动端潭州咖啡屋（静态页面）'},
+		    		{"tit":'项目：模仿smultron页面'}
+		    	]
+		    };
+		    
+		    $main.imagesLoaded(function() {
+		        $main.masonry({
+	                itemSelector: '.pin',
+	                gutter: 20,
+	                isAnimated: true,
+	            });
+		     });
+		     
+		     
+		     function loadImg(){
+		     	for(var i=0;i<dataInt.dataSrc.length;i++){
+			     	html += "<div class='pin'>"+
+				"		        <div class='box'>"+
+				"		        	<div class='b_b'>"+
+				"		          		<img src='./images/anli/"+i+".jpg'/>"+
+				"		        	</div>"+
+				"		            <a href='./anli/"+dataInt.dataSrc[i].src+"'  class='b_title'><span>"+dataInt.dataTitle[i].tit+"</span></a>"+
+				"		        </div>"+
+				"		    </div>";
+			     }
+			     $main.append(html);
+		     }
+			 loadImg();
+		});
+		
+		
+		</script>
+	</body>
+</html>

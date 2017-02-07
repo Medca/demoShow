@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title>带音符的导航</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				img{border:0}
+				a{text-decoration:none;}
+				ul li{list-style:none;}
+				#music{height:56px;background:#1F0A31 url("images/topbg1.jpg") no-repeat top center;margin:100px auto;position:relative;}
+				#music .menu{width:700px;height:56px;margin:0 auto;padding-left:100px;}
+				#music .menu ul li{width:96px;height:56px;float:left;display:block;line-height:56px;text-align:center;position:relative;}
+				#music .menu ul li a{display:block;font-size:14px;font-family:"微软雅黑";color:#fff;position:relative;z-index:4;}
+				#music .menu ul li span{display:block;width:100%;height:0px;position:absolute;left:0;
+				bottom:0;z-index:3;}
+				
+				.txt{font-size:14px;padding:5px;border:1px solid #999;
+				height:300px;width:80%;margin:0 auto;overflow:hidden;}
+		  </style>
+
+	 </head>
+ <body>
+	<div id="music">
+		<div class="menu">
+			<ul>
+				<li dmusic="do" datacolor="#C0EBF7"><a href="javascript:void(0);">音乐库</a><span></span></li>
+				<li dmusic="re" datacolor="#B9D329"><a href="javascript:void(0);">歌手库</a><span></span></li>
+				<li dmusic="mi" datacolor="#69BCF3"><a href="javascript:void(0);">图库</a><span></span></li>
+				<li dmusic="fa" datacolor="#d059cd"><a href="javascript:void(0);">歌词</a><span></span></li>
+				<li dmusic="sol" datacolor="#FA5F94"><a href="javascript:void(0);">直播</a><span></span></li>
+				<li dmusic="la" datacolor="#FFAE5B"><a href="javascript:void(0);">网页播放器</a><span></span></li>
+				<li dmusic="si" datacolor="#FAB4CC"><a href="javascript:void(0);">下载KTV</a><span></span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="txt" contenteditable="true"><div>
+	<video src="mp3/do.mp3" controls="controls" style="display:none" id="play"></video>
+ </body>
+
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+		$(".menu ul li").hover(function(){
+			var color = $(this).attr("datacolor");
+			var dmusic = $(this).attr("dmusic");
+
+			$(this).find("span").css("background",color);
+			$(this).find("span").animate({height:"56px"},300);
+			
+			$("#play").get(0).src="mp3/"+dmusic+".mp3";
+			$("#play").get(0).play();
+		},function(){
+			$(this).find("span").animate({height:"0px"},300);
+		});
+
+	$(document).keydown(function (event) {	
+		var e = event.keyCode-48;
+		if(e == e){
+			$(".menu ul li:nth-child("+e+")").hover();
+		}
+		//$(".menu ul li:nth-child("+e+")").hover();
+	});
+ </script>
+</html>

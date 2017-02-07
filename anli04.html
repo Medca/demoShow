@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JavaScript</title>
+		<link href="css/anli.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div id="main"></div>
+		 
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/masonry-docs.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		$(function() {
+		    var $main = $('#main');
+		    var html = "";
+		    var dataInt = {
+		    	'dataSrc':[
+		    		{'src':'./anli/choujiang/demo.html'},
+		    		{'src':'./anli/js/music_js22/music.html'},
+		    		{'src':'./anli/js/music_js23/2.html'},
+		    		{'src':'./anli/js/yuanhuan_js24/yh.html'},
+		    		{'src':'./anli/js/xxxc_js25/xc.html'},
+		    		{'src':'./anli/js/xxxc_js25/xx.html'},
+		    		{'src':'./anli/js/dialog_js26/dialog.html'},
+		    		{'src':'./anli/js/yzyd_js28/index.html'},
+		    		{'src':'./anli/js/gy_js29/1.html'},
+		    		{'src':'./anli/js/loading_37/动画loading的封装/index.html'},
+		    		{'src':'./anli/js/loading_37/canvas.html'},
+		    		{'src':'./anli/js/loading_37/scroll.html'},
+		    		{'src':'./anli/js/js16/xiaoqiu/index.html'},
+		    		{'src':'./anli/js/js16/14打印文字/打印文字.html'},
+		    		{'src':'./anli/js/js16/18appendChild/pl.html'},
+		    		{'src':'./anli/js/js16/19fdj/多个.html'},
+		    		{'src':'./anli/js/js16/21drag/多元素的拖拽--镜像拖拽-06-drag.html'},
+		    		{'src':'./anli/js/js16/22banner/04焦点轮播图--无缝--上翻效果.html'},
+		    		{'src':'./anli/js/js16/23yuansu/表单移动-运动版.html'},
+		    		{'src':'./anli/js/js16/24dx/danxing.html'},
+		    		{'src':'./anli/js/js16/04sz/index.html'},
+		    		{'src':'./anli/js/js16/11/运动的小球.html'},
+		    		{'src':'./anli/demo/jspbl.html'},
+		    		{'src':'./anli/demo/top.html'},
+		    		{'src':'./anli/web/js/jsonp/1.html'},
+		    		{'src':'./anli/web/js/timekj/时间版运动框架.html'}
+		    	],
+		    	'dataTitle':[
+		    		{"tit":'抽奖系统'},
+		    		{"tit":'js音乐播放器(进度条)'},
+		    		{"tit":'js音乐播放器(歌词解析)'},
+		    		{"tit":'js圆环'},
+		    		{"tit":'js字体下垂'},
+		    		{"tit":'js下雪'},
+		    		{"tit":'js弹窗封装'},
+		    		{"tit":'js圆周运动'},
+		    		{"tit":'js光晕播放'},
+		    		{"tit":'js封装loading'},
+		    		{"tit":'canvas文字'},
+		    		{"tit":'js滚动条'},
+					
+		    		{"tit":'js小球碰撞'},
+		    		{"tit":'js打印文字'},
+		    		{"tit":'js实现评论'},
+		    		{"tit":'js放大镜'},
+		    		{"tit":'js多元素的拖拽'},
+		    		{"tit":'js焦点轮播图'},
+		    		{"tit":'js表单移动'},
+		    		{"tit":'js弹性碰撞'},
+		    		{"tit":'js乘法表'},
+		    		{"tit":'js运动的小球'},
+		    		{"tit":'js瀑布流加载'},
+		    		{"tit":'js回到顶部'},
+		    		{"tit":'jsonp案例'},
+		    		{"tit":'时间版运动框架'}
+		    	]
+		    };
+		    
+		    $main.imagesLoaded(function() {
+		        $main.masonry({
+	                itemSelector: '.pin',
+	                gutter: 20,
+	                isAnimated: true,
+	            });
+		     });
+		     
+		     
+		     function loadImg(){
+		     	for(var i=0;i<dataInt.dataSrc.length;i++){
+			     	html += "<div class='pin'>"+
+				"		        <div class='box'>"+
+				"		        	<div class='b_b'>"+
+				"		          		<img src='./images/anli/"+i+".jpg'/>"+
+				"		        	</div>"+
+				"		            <a href='"+dataInt.dataSrc[i].src+"'  class='b_title'><span>"+dataInt.dataTitle[i].tit+"</span></a>"+
+				"		        </div>"+
+				"		    </div>";
+			     }
+			     $main.append(html);
+		     }
+			 loadImg();
+		});
+		
+		
+		</script>
+	</body>
+</html>

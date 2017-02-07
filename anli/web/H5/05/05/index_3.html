@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>DataTransfer 对象 </title>
+  <style>
+		*{margin:0px; padding:0px;}
+		body{background:url("bj.jpg"); background-size:cover;}
+		.box{width:860px; margin:20px auto; background:rgba(255,255,255,0.5); border-radius:10px; padding:10px;}
+		.drop{width:240px;margin-right:10px;background:rgba(255,255,255,0.5); float:left; height:200px; border-radius:10px;padding:10px;}
+		.box_d{width:860px; margin:20px auto;}
+  </style>
+
+ </head>
+ <body >
+	<div class="box">
+		<img src="2.gif" id="drag1" ondragstart="drag(event)"/>
+		<img src="1.gif"  id="drag2" ondragstart="drag(event)"/>
+	</div>
+	<div class="box_d" >
+		<div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+		<div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+	</div>
+	  <script>
+		window.onload = function(){
+			var lis = document.getElementsByTagName("img");
+			for (var i=0;i<lis.length ;i++ )
+			{
+				lis[i].addEventListener("drop",function(ev){
+					//停止拖拽
+					ev.stopPropagation();
+				});
+			}
+		};
+
+		function allowDrop(ev){
+			//不执行  默认处理
+			ev.preventDefault();
+		}
+		function drag(ev){
+			ev.dataTransfer.setData("Text",ev.target.id);
+		}
+		function drop(ev){
+			//不执行  默认处理
+			ev.preventDefault();
+			// 从DataTransfer对象那里取得数据
+			var data = ev.dataTransfer.getData("Text");
+			ev.target.appendChild(document.getElementById(data));
+		}
+
+
+
+
+
+		/*
+			
+  			在html5新特性：元素的拖放draggable ,在页面只有两样东西是默认是打开：img和链接 true
+  			ondragstart:
+  			ondrag:
+  			ondragend:
+  			
+  			//针对当一些进入目标时候执行的回调函数 购物车
+  			ondraglevea:
+  			ondragenter:
+  			ondragover:
+  			ondrop:
+  				
+  				
+  			//拖放的元素
+  			dragstart:拖拽开始 onmousedown
+  			drag:拖动中 onmonsemove
+  			dragend:拖放结束:onmouseup
+  		
+  		
+  		
+  		window.onload = function(){
+  			var boxDom = document.getElementById("box");
+  			var boxDom2 = document.getElementById("box2");
+  			
+  			boxDom.addEventListener("dragstart", function(e){
+  				//key命名必须交：text,url ie下不允许用其他的名称
+  				//e.dataTransfer.setData("text",this.id);
+ 	  			//e.dataTransfer.setData("text",this.outerHTML);
+  				var json = {};
+  				json.name = "我爱你吗";
+  				json.age = 31;
+  				json.address = "湖南长沙";
+  				json.prie = 12345;
+  				e.dataTransfer.setData("text",JSON.stringify(json));
+  			}, false);
+  			
+  			
+  			boxDom2.addEventListener("drop", function(e){
+  				var html = e.dataTransfer.getData("text");
+  				var json = JSON.parse(html);
+  				boxDom2.innerHTML +=json.name+"=="+json.age;
+  				//var id = e.dataTransfer.getData("text");
+  				//boxDom2.appendChild(document.getElementById(id));
+  			}, false);
+  			
+  			
+  			boxDom2.addEventListener("dragover", function(e){
+  				e.preventDefault();
+  			}, false);
+  			
+  			boxDom.addEventListener("dragover", function(e){
+  				e.preventDefault();
+  			}, false);
+  			
+  			
+  			
+//   		boxDom.ondragstart = 
+  			/*boxDom.addEventListener("dragstart", function(){
+  				console.log("1开始了拖拽了--dragstart");
+  				
+  			}, false);
+  			
+  			boxDom.addEventListener("drag", function(e){
+  				console.log("2拖拽中--drag");
+  			}, false);
+  			
+  			
+  			boxDom.addEventListener("dragend", function(){
+  				console.log("3拖放结束--dragend");
+  				
+  			}, false);
+  			
+  			
+  			boxDom2.addEventListener("dragover", function(e){
+  				e.preventDefault();
+  			}, false);
+  			
+  			boxDom.addEventListener("dragover", function(e){
+  				e.preventDefault();
+  			}, false);
+  			
+  			
+  			boxDom2.addEventListener("dragenter", function(){
+  				console.log("boxDom2==5有元素进入的时候--dragenter");
+  			}, false);
+  			
+  			boxDom2.addEventListener("dragleave", function(){
+  				console.log("boxDom2==4有元素进入的时候--dragleave");
+  			}, false);
+  			
+  			
+  			boxDom2.addEventListener("drop", function(){
+  				console.log("boxDom2==7有元素进入的时候--drop");
+  			}, false);
+  			
+  			
+  			
+  			
+  			
+  		};
+		*/
+  </script>
+ </body>
+</html>

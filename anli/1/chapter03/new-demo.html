@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<!--声明当前页面的编码集：charset=gbk,gb2312(中文编码)，utf-8国际编码-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!--当前页面的三要素-->
+		<title>正在加载</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{font-size:12px;font-family:"微软雅黑";color:#666;background:url("images/bg.jpg") top center;}
+			.btn{width:120px;height:30px;background:#690;display:block;margin:200px auto;text-align:center;line-height:30px;color:#fff;text-decoration:none;border-radius:3px;}
+			.btn:hover{background:#5B8800;}
+		</style>
+
+		<link type="text/css" rel="stylesheet" href="css/tz.css"></link>
+		<link type="text/css" rel="stylesheet" href="css/tz_loading.css"></link>
+	</head>
+<body>
+
+	<a href="#" class="btn">点击我加载</a>
+
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/tz_loading v2.0.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".btn").click(function(){
+			$.tzLoading({content:"来秒杀了....^_^",width:200,height:150,timeout:2});
+		});
+	});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	html,body{height:100%}
+	#hex{
+		color:#fff;
+		font-size:64px;
+		height:64px;
+		text-align:center;
+		line-height:64px;
+		position:relative;
+		top:50%;
+		margin-top:-32px;
+	}
+  </style>
+
+ </head>
+ <body>
+  
+	<div id="hex">#204356</div>
+	<script type="text/javascript">
+		/*
+			案例:根据时间去更换背景颜色
+			知识点：十六进制颜色是有0-9 a-f组成的一组数据，而时间时分秒
+			#204356
+		*/
+
+		(function(){
+		
+			var timer = null,date,color;
+			var stimer = null;
+			var hexDom = document.getElementById("hex");
+			function drawTimer(){
+				date = new Date();
+				//获取时间
+				var h = date.getHours();
+				//获取分钟
+				var m = date.getMinutes();
+				//获取秒中
+				var s = date.getSeconds();
+
+				if(h<10)h = "0"+h;
+				if(m<10)m = "0"+m;
+				if(s<10)s = "0"+s;
+
+				/*
+				h = (h <10 ? "0"+h:h);
+				m = (m <10 ? "0"+m:m);
+				s = (s <10 ? "0"+s:s);*/
+
+				color = "#"+h+m+s;
+				stimer = h+":"+m+":"+s;
+
+				//给body赋予颜色
+				document.body.style.background = color;
+				//给目标
+				hexDom.innerText = stimer;
+
+				setTimeout(drawTimer,1000);
+			};
+
+			drawTimer();
+
+		})();
+
+	</script>
+ </body>
+</html>

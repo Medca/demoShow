@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>腾讯QQ空间时光轴</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{background:url("images/timeline/body_bg.jpg") top center;font-size:12px;font-family:"微软雅黑";color:#666;no-repeat}
+			img{border:0;}
+			/*timeline start*/
+			.timeline{width:1100px;margin:0 auto;position:relative;padding: 68px 0 0 166px;}
+			.timeline .t_line{width:5px;height:1500px;background:#ccc;position:absolute;left:200px;top:135px;}
+			.timeline .t_send{width:700px;height:200px;}
+			.timeline .t_send .t_header{float:left;}
+			.timeline .t_send .t_header img{border-radius:33px;}
+			.timeline .t_send .t_icon{width:13px;height:16px;background:url("images/timeline/sanjiao1.png") no-repeat;float:left;margin: 27px 0 0 10px;}
+			.timeline .t_send .t_box{width:600px;height:165px;background:#fff;float:left;border-radius: 3px;position:relative;}
+			.timeline .t_send .t_box .t_msg{width:540px;height:50px;border:1px solid #ccc;margin:0 auto;padding:10px;outline:none;overflow:auto;}
+			.timeline .t_send .t_box .t_msg img{margin:2px;}
+			.timeline .t_send .t_box .t_title{padding: 10px 0 15px 15px;font-size:14px;}
+			.timeline .t_send .t_box .t_face_btn{float:left;margin: 15px 0 0 16px;}
+			.timeline .t_send .t_box .t_send_btn{float:right;width:80px;height:32px;background:#F60;text-decoration:none;text-align:center;line-height:32px;font-size:14px;color:#fff;margin: 8px 20px 0 0;border-radius:3px;}
+			.timeline .t_send .t_box .t_send_btn:hover{background:#F00;}
+			.timeline .t_send .t_box .t_face_con{width:365px;height:180px;border:1px solid #ccc;background:#fff;box-shadow: 1px 2px 6px 0px #000;position:absolute;left:24px;top:158px;padding:5px;display:none;z-index:1;}
+			.timeline .t_send .t_box .t_face_con ul li{list-style:none;float:left;margin:2px;cursor: pointer;}
+			.timeline .t_all{width:1100px;position:relative;}
+			.timeline .t_all .l_header{float:left;}
+			.timeline .t_all .t_list{float:left;margin:20px 0;}
+			.timeline .t_all .t_list .l_icon{width:13px;height:16px;background:url("images/timeline/sanjiao1.png") no-repeat;float:left;margin: 27px 0 0 10px;}
+			.timeline .t_all .t_list .l_header img{border-radius:33px;}
+			.timeline .t_all .t_list .l_msg{width:500px;background:#fff;float:left;border-radius:3px;padding:16px;font-size:14px;}
+			.clear{clear:both;}
+			/*end timeline*/
+
+		</style>
+	<link type="text/css" rel="stylesheet" href="css/qq-timeline/css/animate.css"></link>
+	<link type="text/css" rel="stylesheet" href="js/sg/css/sg.css"></link>
+	</head>
+<body>
+
+	<!--timeline start-->
+	<div class="timeline">
+		<div class="t_line"></div>
+		<div class="t_send">
+			<div class="t_header">
+				<img src="images/timeline/qq.png" alt="Duke" width="60" height="60"/>
+			</div>
+			<div class="t_icon"></div>
+			<div class="t_box">
+				<p class="t_title">有什么新鲜事想告诉大家?</p>			
+				<div class="t_msg" contenteditable="true"></div>
+				<p class="t_face">
+					<a href="#" class="t_face_btn"><img src="images/timeline/face/cza_thumb.gif" alt="表情" width="22" height="22" /></a>
+					<a href="#" class="t_send_btn">发 表</a>
+				</p>
+				<div class="t_face_con">
+					<ul id="q_ul">
+						<li><img src="images/timeline/face/zz2_thumb.gif" title="[织]" width="22" height="22"></li>
+						<li><img src="images/timeline/face/horse2_thumb.gif" title="[神马]"></li>
+						<li><img src="images/timeline/face/fuyun_thumb.gif" title="[浮云]"></li>
+						<li><img src="images/timeline/face/geili_thumb.gif" title="[给力]"></li>
+						<li><img src="images/timeline/face/wg_thumb.gif" title="[围观]"></li>
+						<li><img src="images/timeline/face/vw_thumb.gif" title="[威武]"></li>
+						<li><img src="images/timeline/face/panda_thumb.gif" title="[熊猫]"></li>
+						<li><img src="images/timeline/face/rabbit_thumb.gif" title="[兔子]"></li>
+						<li><img src="images/timeline/face/otm_thumb.gif" title="[奥特曼]"></li>
+						<li><img src="images/timeline/face/j_thumb.gif" title="[囧]"></li>
+						<li><img src="images/timeline/face/hufen_thumb.gif" title="[互粉]"></li>
+						<li><img src="images/timeline/face/liwu_thumb.gif" title="[礼物]"></li>
+						<li><img src="images/timeline/face/smilea_thumb.gif" title="[呵呵]"></li>
+						<li><img src="images/timeline/face/tootha_thumb.gif" title="[嘻嘻]"></li>
+						<li><img src="images/timeline/face/laugh.gif" title="[哈哈]"></li>
+						<li><img src="images/timeline/face/tza_thumb.gif" title="[可爱]"></li>
+						<li><img src="images/timeline/face/kl_thumb.gif" title="[可怜]"></li>
+						<li><img src="images/timeline/face/kbsa_thumb.gif" title="[挖鼻屎]"></li>
+						<li><img src="images/timeline/face/cj_thumb.gif" title="[吃惊]"></li>
+						<li><img src="images/timeline/face/shamea_thumb.gif" title="[害羞]"></li>
+						<li><img src="images/timeline/face/zy_thumb.gif" title="[挤眼]"></li>
+						<li><img src="images/timeline/face/bz_thumb.gif" title="[闭嘴]"></li>
+						<li><img src="images/timeline/face/bs2_thumb.gif" title="[鄙视]"></li>
+						<li><img src="images/timeline/face/lovea_thumb.gif" title="[爱你]"></li>
+						<li><img src="images/timeline/face/sada_thumb.gif" title="[泪]"></li>
+						<li><img src="images/timeline/face/heia_thumb.gif" title="[偷笑]"></li>
+						<li><img src="images/timeline/face/qq_thumb.gif" title="[亲亲]"></li>
+						<li><img src="images/timeline/face/sb_thumb.gif" title="[生病]"></li>
+						<li><img src="images/timeline/face/mb_thumb.gif" title="[太开心]"></li>
+						<li><img src="images/timeline/face/ldln_thumb.gif" title="[懒得理你]"></li>
+						<li><img src="images/timeline/face/yhh_thumb.gif" title="[右哼哼]"></li>
+						<li><img src="images/timeline/face/zhh_thumb.gif" title="[左哼哼]"></li>
+						<li><img src="images/timeline/face/x_thumb.gif" title="[嘘]"></li>
+						<li><img src="images/timeline/face/cry.gif" title="[衰]"></li>
+						<li><img src="images/timeline/face/wq_thumb.gif" title="[委屈]"></li>
+						<li><img src="images/timeline/face/t_thumb.gif" title="[吐]"></li>
+						<li><img src="images/timeline/face/k_thumb.gif" title="[打哈气]"></li>
+						<li><img src="images/timeline/face/bba_thumb.gif" title="[抱抱]"></li>
+						<li><img src="images/timeline/face/angrya_thumb.gif" title="[怒]"></li>
+						<li><img src="images/timeline/face/yw_thumb.gif" title="[疑问]"></li>
+						<li><img src="images/timeline/face/cza_thumb.gif" title="[馋嘴]"></li>
+						<li><img src="images/timeline/face/88_thumb.gif" title="[拜拜]"></li>
+						<li><img src="images/timeline/face/sk_thumb.gif" title="[思考]"></li>
+						<li><img src="images/timeline/face/sweata_thumb.gif" title="[汗]"></li>
+						<li><img src="images/timeline/face/sleepya_thumb.gif" title="[困]"></li>
+						<li><img src="images/timeline/face/sleepa_thumb.gif" title="[睡觉]"></li>
+						<li><img src="images/timeline/face/money_thumb.gif" title="[钱]"></li>
+						<li><img src="images/timeline/face/sw_thumb.gif" title="[失望]"></li>
+						<li><img src="images/timeline/face/cool_thumb.gif" title="[酷]"></li>
+						<li><img src="images/timeline/face/hsa_thumb.gif" title="[花心]"></li>
+						<li><img src="images/timeline/face/hatea_thumb.gif" title="[哼]"></li>
+						<li><img src="images/timeline/face/gza_thumb.gif" title="[鼓掌]"></li>
+						<li><img src="images/timeline/face/dizzya_thumb.gif" title="[晕]"></li>
+						<li><img src="images/timeline/face/bs_thumb.gif" title="[悲伤]"></li>
+						<li><img src="images/timeline/face/crazya_thumb.gif" title="[抓狂]"></li>
+						<li><img src="images/timeline/face/h_thumb.gif" title="[黑线]"></li>
+						<li><img src="images/timeline/face/yx_thumb.gif" title="[阴险]"></li>
+						<li><img src="images/timeline/face/nm_thumb.gif" title="[怒骂]"></li>
+						<li><img src="images/timeline/face/hearta_thumb.gif" title="[心]"></li>
+						<li><img src="images/timeline/face/unheart.gif" title="[伤心]"></li>
+						<li><img src="images/timeline/face/pig.gif" title="[猪头]"></li>
+						<li><img src="images/timeline/face/ok_thumb.gif" title="[ok]"></li>
+						<li><img src="images/timeline/face/ye_thumb.gif" title="[耶]"></li>
+						<li><img src="images/timeline/face/good_thumb.gif" title="[good]"></li>
+						<li><img src="images/timeline/face/no_thumb.gif" title="[不要]"></li>
+						<li><img src="images/timeline/face/z2_thumb.gif" title="[赞]"></li>
+						<li><img src="images/timeline/face/come_thumb.gif" title="[来]"></li>
+						<li><img src="images/timeline/face/sad_thumb.gif" title="[弱]"></li>
+						<li><img src="images/timeline/face/lazu_thumb.gif" title="[蜡烛]"></li>
+						<li><img src="images/timeline/face/clock_thumb.gif" title="[钟]"></li>
+						<li><img src="images/timeline/face/cake.gif" title="[蛋糕]"></li>
+						<li><img src="images/timeline/face/m_thumb.gif" title="[话筒]"></li>
+						<li><img src="images/timeline/face/weijin_thumb.gif" title="[围脖]"></li>
+						<li><img src="images/timeline/face/lxhzhuanfa_thumb.gif" title="[转发]"></li>
+						<li><img src="images/timeline/face/lxhluguo_thumb.gif" title="[路过这儿]"></li>
+						<li><img src="images/timeline/face/bofubianlian_thumb.gif" title="[bofu变脸]"></li>
+						<li><img src="images/timeline/face/gbzkun_thumb.gif" title="[gbz困]"></li>
+						<li><img src="images/timeline/face/boboshengmenqi_thumb.gif" title="[生闷气]"></li>
+						<li><img src="images/timeline/face/chn_buyaoya_thumb.gif" title="[不要啊]"></li>
+						<li><img src="images/timeline/face/daxiongleibenxiong_thumb.gif" title="[dx泪奔]"></li>
+						<li><img src="images/timeline/face/cat_yunqizhong_thumb.gif" title="[运气中]"></li>
+						<li><img src="images/timeline/face/youqian_thumb.gif" title="[有钱]"></li>
+						<li><img src="images/timeline/face/cf_thumb.gif" title="[冲锋]"></li>
+						<li><img src="images/timeline/face/camera_thumb.gif" title="[照相机]"></li>	
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="t_all"></div>
+		<div class="clear"></div>
+
+	</div>
+	<!--end timeline-->
+
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/sg/tz_util.js"></script>
+<script type="text/javascript" src="js/sg/sg.js"></script>
+
+<script type="text/javascript">
+	
+	$(function(){
+		loading("持续付出不亚于任何人的努力！",3)
+		// 初始化
+		var message = sessionStorage.getItem("message");
+
+		//var message = localStorage.getItem("message");
+		if(message){
+			$(".t_all").html(message);
+		}
+		
+		// 点击显示表情
+		$(".t_face_btn").click(function(){
+			$(".t_face_con").toggle(500);
+		});
+
+		// 选中QQ表情添加到文本框
+		$("#q_ul").find("li").click(function(){
+			var img = $(this).find("img").clone();
+			$(".t_msg").append(img);
+		});
+
+		// 点击发布
+		$(".t_send_btn").click(function(){
+			
+			var content = $(".t_msg").html();
+			var text = $(".t_msg").text();
+			loading(text,3)
+			if(content == ""){
+				$(".t_msg").focus();
+				return;
+			}
+
+			$(".t_all").prepend("<div class='t_list animated bounceIn'>"+
+			"				<div class='l_header'><img src='images/timeline/qq.png' alt='Duke' width='60'	height='60' /></div>"+
+			"				<div class='l_icon'></div>"+
+			"				<div class='l_msg'>"+$('.t_msg').html()+"</div>"+
+			"			</div>");
+
+			$(".t_face_con").toggle(500);
+		
+			//存储到浏览器session中，浏览器关闭，即消失
+			 sessionStorage.setItem("message",$(".t_all").html());
+
+			// 本地存储，浏览器关闭仍然存在
+			//localStorage.setItem("message",$(".t_all").html());
+
+
+		});
+
+	});
+
+
+/*
+	$(window).scroll(function(){
+		
+	});
+*/
+
+
+</script>
+</body>
+</html>

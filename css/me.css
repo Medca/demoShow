@@ -1,0 +1,111 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+img {
+	border: 0
+}
+
+body {
+	font-size: 12px;
+	font-family: "微软雅黑";
+	color: #333;
+	background: url("../images/me/bg-me.jpg") top center;
+}
+
+.work {
+	width: 960px;
+	height: 2000px;
+	margin: 0 auto;
+}
+
+.work .w_header {
+	height: 148px;
+	position: relative;
+}
+
+.work .w_header .h_pic {
+	position: absolute;
+	left: 194px;
+	top: 64px;
+}
+.work .w_header .h_pic img{
+	width: 100px;
+	height: 100px;
+	display: block;
+	border-radius: 50%;
+}
+
+.work .w_header .h_title {
+	font-size: 40px;
+	width: 500px;
+	height: 100px;
+	position: absolute;
+	right: 141px;
+	top: 103px;
+}
+
+.work .w_content {
+	height: 752px;
+}
+
+.work .w_content .c_content {
+	height: 752px;
+	width: 580px;
+	margin: 0 auto;
+}
+
+.work .w_content .c_content .c_test {
+	width: 580px;
+	margin: 0 auto;
+}
+
+.work .w_content .c_content .c_test .c_title {
+	display: block;
+	margin-top: 20px;
+	margin-left: 20px;
+	font-size: 16px;
+	color: #333;
+}
+
+.work .w_content .c_content .c_test .c_bottom {
+	border: 1px dotted #333;
+	width: 540px;
+	margin: 0 auto;
+}
+
+.work .w_content .c_content .c_test p {
+	display: block;
+	margin-top: 5px;
+	margin-left: 50px;
+	font-size: 12px;
+	color: #f00;
+}
+
+.work .w_content .c_content .c_test span {
+	font-size: 18px;
+	color: #333;
+	margin-left: 6px;
+}
+
+.work .w_content .c_content .c_test .c_txt {
+	display: block;
+	margin-top: 5px;
+	margin-left: 50px;
+	font-size: 12px;
+	color: #333;
+}
+
+.work .w_content .c_content .c_test .c_t_t {
+	font-size: 16px;
+	color: #00f;
+}
+
+.work .w_content .c_content .c_test .hh {
+	display: block;
+}
+
+.t_jn{
+	margin: auto;
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+	<head>
+		<!--声明当前页面的编码集：charset=gbk,gb2312(中文编码)，utf-8国际编码-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!--当前页面的三要素-->
+		<title>百度首页卡片</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+
+		<!--css,js-->
+		<style type="text/css">
+			*{margin:0;padding:0;}
+			body{background:url("images/bg.jpg") no-repeat top center;font-size:12px;font-family:"微软雅黑";color:#666;}
+			/*nav start*/
+			.nav{width:910px;height:315px;margin:150px auto;}
+			.nav .n_menu{width:80px;height:315px;background:rgba(0,0,0,0.3);position:relative;float:left;}
+			.nav .n_menu a{width:80px;height:35px;display:block;text-align:center;line-height:35px;text-decoration:none;color:#fff;font-size:14px;}
+			.nav .n_menu .n_sel{background:url("images/s_menu.png") no-repeat;}
+			.nav .n_menu a:hover{background:#6F797E;}
+			.nav .n_menu .n_tools{width:80px;height:35px;display:block;position:absolute;bottom:0;left:0;}
+			.nav .n_menu .n_tools .n_tol{width:20px;height:20px;display:block;background:url("images/tb.png") no-repeat -688px -406px;margin: 6px auto;}
+			.nav .n_con{width:810px;height:315px;float:right;overflow:hidden;position:relative;}
+			.nav .n_con img{position:absolute;left:0;top:-315px;}
+
+			/*end nav*/
+
+		</style>
+
+	</head>
+<body>
+
+	<!--nav start-->
+	<div class="nav">
+		<div class="n_menu">
+			<a href="#">音乐</a>
+			<a href="#" class="n_sel">购物</a>
+			<a href="#">股票</a>
+			<a href="#">游戏</a>
+			<a href="#">视频</a>
+			<a href="#">导航</a>
+			<a href="#">彩票</a>
+			<a href="#" class="n_tools">
+				<span class="n_tol"></span>
+			</a>
+		</div>
+		<div class="n_con">
+			<img src="images/1.jpg" alt="" width="" height=""/>
+			<img src="images/2.jpg" alt="" width="" height="" style="top:0;"/>
+			<img src="images/3.jpg" alt="" width="" height=""/>
+			<img src="images/4.jpg" alt="" width="" height=""/>
+		</div>
+	</div>
+	<!--end nav-->
+
+<!--引入jQuery的官方类库-->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	
+	var i = 0; // 当前点击的点
+	var j = 1; // 默认值，最后一点点击的值
+	$(function(){
+		$(".n_menu").find("a").click(function(){
+			$(this).addClass("n_sel").siblings().removeClass("n_sel");
+			i = $(this).index();
+			if(i < j){
+				$(".n_con").find("img").eq(i).animate({top:"0px"},300);
+				$(".n_con").find("img").eq(j).animate({top:"315px"},300);
+				j = i;
+			} else if(i > j){
+				$(".n_con").find("img").eq(i).animate({top:"0px"},300);
+				$(".n_con").find("img").eq(j).animate({top:"-315px"},300);
+				j = i;
+			}
+		});
+	});
+
+</script>
+
+</body>
+</html>

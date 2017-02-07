@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>html+css</title>
+		<link href="css/anli.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div id="main"></div>
+		 
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/masonry-docs.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		$(function() {
+		    var $main = $('#main');
+		    var html = "";
+		    var dataInt = {
+		    	'dataSrc':[
+		    		{'src':'./anli/qq/qq.html'},
+		    		{'src':'./anli/music/music.html'},
+		    		{'src':'./anli/nav/new-nav.html'},
+		    		{'src':'./anli/qq_banner/new-banner.html'},
+		    		{'src':'./anli/tcc/sptcc.html'},
+		    		{'src':'./anli/tz_dialog_v2.0/demo.html'},
+		    		{'src':'./anli/musicdaohan/index.html'},
+		    		{'src':'./anli/yse/index.html'},
+		    		{'src':'./anli/京东banner/banner.html'},
+		    		{'src':'./anli/demo/list.html'},
+		    		{'src':'./anli/tz-gw01/index.html'},
+		    		{'src':'./anli/xiaomi/index.html'},
+		    		{'src':'./anli/web/mogui/01/静态网站开发/旅游官网静态网站开发/index.html'},
+		    		{'src':'./anli/web/mogui/02/ad/电商平台静态布局/index.html'}
+		    	],
+		    	'dataTitle':[
+		    		{"tit":'QQ空间切换皮肤'},
+		    		{"tit":'JavaWEB开发QQ音乐播放'},
+		    		{"tit":'京东左侧导航'},
+		    		{"tit":'腾讯课堂banner图'},
+		    		{"tit":'视频弹出窗'},
+		    		{"tit":'tz_dialog'},
+		    		{"tit":'带音符的导航'},
+		    		{"tit":'颜色选择器'},
+		    		{"tit":'京东banner'},
+		    		{"tit":'列表切换'},
+		    		{"tit":'潭州学院官方平台'},
+		    		{"tit":'小米官网'},
+		    		{"tit":'旅游官网静态网站开发'},
+		    		{"tit":'电商平台静态布局'}
+		    	]
+		    };
+		    
+		    $main.imagesLoaded(function() {
+		        $main.masonry({
+	                itemSelector: '.pin',
+	                gutter: 20,
+	                isAnimated: true,
+	            });
+		     });
+		     
+		     
+		     function loadImg(){
+		     	for(var i=0;i<dataInt.dataSrc.length;i++){
+			     	html += "<div class='pin'>"+
+				"		        <div class='box'>"+
+				"		        	<div class='b_b'>"+ 
+				"		          		<img src='./images/anli/"+i+".jpg'/>"+
+				"		        	</div>"+
+				"		            <a href='"+dataInt.dataSrc[i].src+"'  class='b_title'><span>"+dataInt.dataTitle[i].tit+"</span></a>"+
+				"		        </div>"+
+				"		    </div>";
+			     }
+			     $main.append(html);
+		     }
+			 loadImg();
+		});
+		
+		
+		</script>
+	</body>
+</html>

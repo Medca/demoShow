@@ -1,0 +1,788 @@
+/*内页主体样式*/
+.webBody {
+	background: #f4f4f4;
+}
+/*面包屑导航样式*/
+.webLogo {
+	margin: 0px auto;
+	width: 1000px;
+	height: 68px;
+	border-bottom: 2px solid #dd85b3;
+	background: url("../images/position.png") no-repeat left center;
+	text-indent: 20px;
+	font-size: 14px;
+	line-height: 68px;
+}
+
+.webLogo a {
+	color: #666;
+	text-decoration: none;
+}
+
+.webLogo a:hover {
+	color: #e20076;
+	text-decoration: underline;
+}
+
+#WebCon {
+	margin: 0 auto;
+	width: 1000px;
+	border: 1px solid red;
+	background: url("../images/webbg1.png") no-repeat,
+									url("../images/webbg2.png") no-repeat right top #fff;
+}
+
+#web_Menu {
+	margin: 30px auto 15px;
+	width: 940px;
+}
+
+#web_Menu dl {
+	margin-bottom: 5px;
+	width: 100%;
+	height: 30px;
+}
+
+#web_Menu dl dt {
+	float: left;
+	width: 180px;
+	height: 30px;
+	background: #ededed;
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 30px;
+}
+
+#web_Menu dl dt a {
+	display: block;
+	color: #000;
+	text-decoration: none;
+	cursor: default;
+}
+
+#web_Menu dl dt a:hover {
+	background: #e10076;
+	color: #fff;
+}
+
+#web_Menu dl dd {
+	float: right;
+	width: 758px;
+	height: 30px;
+	background: #f4f4f4;
+	line-height: 30px;
+}
+
+#web_Menu dl dd a {
+	float: left;
+	padding: 0px 10px;
+	color: #000;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+#web_Menu dl dd a:hover {
+	color: #e10076;
+}
+
+
+/*第页第一部分样式*/
+#webPart1 {
+	margin: 0px auto 20px;
+	width: 940px;
+}
+
+img.webbg3 {
+	display: block;
+	margin: 0px auto;
+}
+/*左边轮播器样式*/
+#webPart1_l {
+	position: relative;
+	float: left;
+	width: 361px;
+	height: 270px;
+}
+
+#webPart1_l .webAdvcon {
+	position: relative;
+/*相对定位元素*/
+	overflow: hidden;
+	width: 361px;
+	height: 270px;
+}
+
+#webPart1_l .webAdvcon img {
+	position: absolute;
+/*绝对定位*/
+}
+
+#webPart1_l ul.webAdvbutton {
+	position: absolute;
+	right: 0px;
+	bottom: 5px;
+	z-index: 333;
+	width: 105px;
+	height: 25px;
+}
+
+#webPart1_l ul.webAdvbutton li {
+	float: left;
+	margin: 0px 2px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #fff;
+	background: rgba(255,255,255,0.5);
+	list-style: none;
+	text-align: center;
+	font-size: 12px;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+#webPart1_l ul.webAdvbutton li.hover {
+	border: 1px solid #e63003;
+	background: #f66e08;
+	color: #fff;
+}
+
+#webPart1_l dl.text {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	z-index: 22;
+	overflow: hidden;
+	width: 361px;
+	height: 38px;
+	background: rgba(0,0,0,0.5);
+}
+
+#webPart1_l dl.text dd {
+	height: 38px;
+	color: #fff;
+	text-indent: 10px;
+	font-size: 14px;
+	line-height: 38px;
+}
+
+#webPart2_r {
+	position: relative;
+	float: right;
+	width: 568px;
+	height: 270px;
+	border: 1px dashed #e20076;
+	background: #f9f9f9;
+}
+
+#webPart2_r img.dirl {
+	position: absolute;
+	top: 100px;
+	left: 0px;
+}
+
+#webPart2_r img.dirr {
+	position: absolute;
+	top: 100px;
+	right: 0px;
+}
+
+#webPart2_r #webPart2_Scroll {
+	position: relative;
+	overflow: hidden;
+/*隐藏*/
+	margin: 40px auto 0px;
+	width: 504px;
+	height: 210px;
+}
+
+#webPart2_r #webPart2_Scroll .webPart2_ScrollCon {
+	position: absolute;
+	left: 0px;
+/*滚动就是改变他的值*/
+	width: 1000%;
+	height: 210px;
+}
+
+#webPart2_r #webPart2_Scroll .webPart2_ScrollCon dl {
+	float: left;
+	margin: 0px 9px;
+	width: 150px;
+	height: 210px;
+}
+
+#webPart2_r #webPart2_Scroll .webPart2_ScrollCon dl dt {
+	width: 150px;
+	height: 150px;
+	background: yellow;
+}
+
+#webPart2_r #webPart2_Scroll .webPart2_ScrollCon dl dd {
+	height: 25px;
+	text-align: center;
+	font-size: 12px;
+	line-height: 25px;
+}
+
+#webPart2_r #webPart2_Scroll .webPart2_ScrollCon dl dd a {
+	color: #000;
+	text-decoration: none;
+}
+
+#webPart2_r #webPart2_Scroll .webPart2_ScrollCon dl dd a:hover {
+	color: #e10076;
+}
+
+#webPart2_r #webPart2_Scroll .webPart2_ScrollCon dl dd span {
+	color: #e10076;
+	font-weight: bold;
+}
+
+#webPart1_l {
+	position: relative;
+	float: left;
+	width: 361px;
+	height: 270px;
+}
+
+#webPart1_l .webAdvcon {
+	position: relative;
+/*相对定位元素*/
+	overflow: hidden;
+	width: 361px;
+	height: 270px;
+}
+
+#webPart1_l .webAdvcon img {
+	position: absolute;
+/*绝对定位*/
+}
+
+#webPart1_l ul.webAdvbutton {
+	position: absolute;
+	right: 0px;
+	bottom: 5px;
+	z-index: 333;
+	width: 105px;
+	height: 25px;
+}
+
+#webPart1_l ul.webAdvbutton li {
+	float: left;
+	margin: 0px 2px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #fff;
+	background: rgba(255,255,255,0.5);
+	text-align: center;
+	font-size: 12px;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+#webPart1_l ul.webAdvbutton li.hover {
+	border: 1px solid #e63003;
+	background: #f66e08;
+	color: #fff;
+}
+
+#webPart1_l dl.text {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	z-index: 22;
+	overflow: hidden;
+	width: 361px;
+	height: 38px;
+	background: rgba(0,0,0,0.5);
+}
+
+#webPart1_l dl.text dd {
+	height: 38px;
+	color: #fff;
+	text-indent: 10px;
+	font-size: 14px;
+	line-height: 38px;
+}
+
+
+
+/*内页第二部分的样式*/
+.webProduct {
+	margin: 0px auto 20px;
+	width: 950px;
+	height: 500px;
+}
+
+.webProduct p.Product_Title {
+	padding-right: 10px;
+	height: 49px;
+	background: url("../images/web_ht.jpg");
+	text-align: right;
+	line-height: 49px;
+}
+
+.webProduct p.Product_Title span {
+	float: left;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.webProduct p.Product_Title span font {
+	display: inline-block;
+	padding-right: 10px;
+	width: 41px;
+	color: #fff;
+	text-align: center;
+	font-size: 30px;
+}
+
+.webProduct p.Product_Title a {
+	margin: 0px 5px;
+	color: #666;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.webProduct p.Product_Title a:hover {
+	color: #e10076;
+}
+
+.webProduct dl {
+	float: left;
+	margin: 30px 16px;
+	width: 280px;
+	height: 370px;
+	border: 5px solid #e10076;
+	border-right: 1px dashed #e10076;
+	border-left: 1px dashed #e10076;
+	border-radius: 5px;
+}
+
+.webProduct dl dt {
+	padding-top: 5px;
+	text-align: center;
+}
+
+.webProduct dl dd.title {
+	height: 45px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 45px;
+}
+
+.webProduct dl dd.title a {
+	color: #000;
+	text-decoration: none;
+}
+
+.webProduct dl dd.title a:hover {
+	color: #e10076;
+}
+
+.webProduct dl dd.price {
+	margin: 0px auto;
+	width: 137px;
+	height: 38px;
+	border-radius: 10px;
+	background: #e10076;
+	color: #fff;
+	text-align: center;
+	font-size: 16px;
+	line-height: 38px;
+}
+
+
+
+
+
+
+
+
+
+
+/*风景详细页*/
+/*第一部分*/
+#Deltail_part1 {
+	margin: 15px auto 25px;
+	width: 950px;
+	height: 500px;
+}
+
+#Deltail_part1 .Deltail_part1_L {
+	float: left;
+	width: 420px;
+	height: 500px;
+}
+
+#Deltail_part1 .Deltail_part1_R {
+	float: right;
+	width: 480px;
+	height: 500px;
+}
+/*图片选项卡样式*/
+#Deltail_part1 .Deltail_part1_L .Deltail_img {
+	overflow: hidden;
+	width: 420px;
+	height: 420px;
+}
+
+#Deltail_part1 .Deltail_part1_L .Deltail_but {
+	padding-top: 10px;
+	height: 60;
+}
+
+#Deltail_part1 .Deltail_part1_L .Deltail_but img {
+	float: left;
+	margin-right: 5px;
+}
+
+#Deltail_part1 .Deltail_part1_L .Deltail_but img:hover {
+	border: 2px solid red;
+}
+/*右边详细内容样式*/
+#Deltail_part1 .Deltail_part1_R h1 {
+	height: 45px;
+	color: #e10076;
+	font-size: 22px;
+	line-height: 45px;
+}
+
+#Deltail_part1 .Deltail_part1_R p.info {
+	font-size: 14px;
+	line-height: 25px;
+}
+
+#Deltail_part1 .Deltail_part1_R span {
+	color: #e10076;
+}
+
+#Deltail_part1 .Deltail_part1_R p.common {
+	font-size: 14px;
+	line-height: 30px;
+}
+
+#Deltail_part1 .Deltail_part1_R p.common font {
+	font-weight: bold;
+}
+
+#Deltail_part1 .Deltail_part1_R p.common span {
+	font-size: 30px;
+}
+
+#Deltail_part1 .Deltail_part1_R p.paddTop {
+	padding-top: 10px;
+}
+
+#Deltail_part1 .Deltail_part1_R p.bor {
+	padding-bottom: 10px;
+	border-bottom: 1px dotted #666;
+}
+
+#Deltail_part1 .Deltail_part1_R p.common img {
+	margin-right: 3px;
+}
+
+#Deltail_part1 .Deltail_part1_R p.common span.priceType {
+	display: inline-block;
+	width: 48px;
+	height: 29px;
+	background: url("../images/xlxqctxsbg.png");
+	color: #666;
+	text-align: center;
+	font-size: 14px;
+	line-height: 29px;
+}
+
+#Deltail_part1 .Deltail_part1_R p.but {
+	padding-top: 25px;
+}
+
+#Deltail_part1 .Deltail_part1_R p.but img {
+	float: left;
+	margin-right: 10px;
+}
+
+
+/*详细内容样式*/
+#Deltail_Con {
+	margin: 0px auto;
+	padding-bottom: 30px;
+	width: 950px;
+}
+
+#Deltail_Con ul.Deltail_Menu {
+	height: 35px;
+	border-bottom: 2px solid #e10076;
+}
+
+#Deltail_Con ul.Deltail_Menu li {
+	float: left;
+	margin-right: 10px;
+	width: 85px;
+	height: 35px;
+	list-style: none;
+	text-align: center;
+	font-size: 14px;
+	line-height: 35px;
+}
+
+#Deltail_Con ul.Deltail_Menu li a {
+	display: block;
+	border-radius: 5px 5px 0px 0px;
+	background: #FF99CC;
+	color: #000;
+	text-decoration: none;
+}
+
+#Deltail_Con ul.Deltail_Menu li a:hover {
+	background: #e10076;
+	color: #fff;
+}
+
+#Deltail_Con .Deltail_Common {
+	margin-top: 30px;
+	border: 1px solid #e10076;
+	font-size: 14px;
+	line-height: 25px;
+}
+
+#Deltail_Con .Deltail_Common h2.Deltail_title {
+	background: #e10076;
+	color: #fff;
+	text-indent: 10px;
+	font-size: 14px;
+	line-height: 30px;
+}
+
+#Deltail_Con .Deltail_Common .Deltail_Common_con {
+	padding: 20px;
+}
+
+/*内页签证样式*/
+.web_Qz {
+	margin: 10px auto;
+	width: 950px;
+	height: 600px;
+}
+
+.web_Qz dl {
+	float: left;
+	margin: 15px 6px;
+	padding: 15px 5px;
+	width: 450px;
+	height: 123px;
+	border: 1px dashed #ddd;
+}
+
+.web_Qz dl dt {
+	float: left;
+	padding: 4px;
+	width: 170px;
+	height: 113px;
+	border: 1px solid #ddd;
+}
+
+.web_Qz dl dd {
+	float: right;
+	width: 250px;
+	color: #666;
+	font-size: 14px;
+	line-height: 25px;
+}
+
+.web_Qz dl dd.title {
+	color: #e10076;
+	font-size: 16px;
+	line-height: 45px;
+}
+
+.web_Qz dl dd span {
+	margin-right: 10px;
+}
+
+.web_Qz dl dd span font {
+	color: #e10076;
+}
+
+
+/*签证详细内容页样式*/
+#Web_QzDeltail {
+	margin: 0px auto;
+	width: 950px;
+}
+
+#Web_QzDeltail dl {
+	float: left;
+	margin: 15px 6px;
+	padding: 15px 5px;
+	height: 176px;
+}
+
+#Web_QzDeltail dl dt {
+	float: left;
+	padding: 4px;
+	width: 250px;
+	height: 166px;
+	border: 1px solid #ddd;
+}
+
+#Web_QzDeltail dl dd {
+	float: right;
+	width: 650px;
+	color: #666;
+	font-size: 14px;
+	line-height: 25px;
+}
+
+#Web_QzDeltail dl dd.title {
+	color: #e10076;
+	font-size: 16px;
+	line-height: 30px;
+}
+
+#Web_QzDeltail dl dd span {
+	margin-right: 10px;
+}
+
+#Web_QzDeltail dl dd span font {
+	color: #e10076;
+}
+
+#Web_QzDeltail dl dd.but {
+	padding-top: 5px;
+}
+
+/*签证栏目样式*/
+#Web_QzDeltail .Web_QzNav {
+	height: 55px;
+	border-top: 1px solid #e10076;
+	border-bottom: 1px solid #e10076;
+}
+
+#Web_QzDeltail .Web_QzNav font {
+	float: left;
+	display: inline-block;
+	width: 120px;
+	height: 55px;
+	background: #e10076;
+	color: #fff;
+	text-align: center;
+	line-height: 55px;
+}
+
+#Web_QzDeltail .Web_QzNav span {
+	float: left;
+	display: inline-block;
+	margin: 0px 10px;
+	margin-top: 10px;
+	width: 120px;
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	cursor: pointer;
+}
+
+#Web_QzDeltail .Web_QzNav span.hover {
+	background: #666;
+	color: #fff;
+}
+
+.Web_QzScroll {
+	overflow: hidden;
+	margin: 25px 0;
+	width: 950px;
+	height: 500px;
+}
+
+.Web_QzScroll .Web_QzScrollCon {
+	height: 500px;
+}
+
+.web_QzDeltailInfo {
+	padding-bottom: 35px;
+}
+
+.web_QzDeltailInfo span {
+	display: block;
+	width: 80px;
+	height: 30px;
+	background: #e10076;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+}
+
+.web_QzDeltailInfo p {
+	line-height: 35px;
+}
+
+
+/*搜索结果页样式*/
+#web_Search {
+	margin: 0px auto;
+	padding-bottom: 30px;
+	width: 950px;
+}
+
+#web_Search dl {
+	padding-top: 20px;
+	height: 305px;
+	border-bottom: 1px dashed #ddd;
+}
+
+#web_Search dl dt {
+	float: left;
+	padding: 5px;
+	width: 270px;
+	height: 270px;
+	border: 1px solid #ddd;
+}
+
+#web_Search dl dd {
+	float: right;
+	width: 645px;
+	font-size: 14px;
+	line-height: 30px;
+}
+
+#web_Search dl dd.title {
+	font-size: 18px;
+	line-height: 35px;
+}
+
+#web_Search dl dd.title a {
+	color: #e10076;
+	text-decoration: none;
+}
+
+#web_Search dl dd.info {
+	padding: 10px 0px;
+	color: #666;
+	font-size: 14px;
+	line-height: 25px;
+}
+
+#web_Search dl dd font {
+	color: #e10076;
+	font-size: 24px;
+}
+
+#web_Search dl dd span {
+	color: #666;
+}
+
+#web_Search dl dd.more {
+	text-align: right;
+}
+
+#web_Search dl dd.more a {
+	display: inline-block;
+	width: 150px;
+	height: 30px;
+	background: #e10076;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 5px;
+}

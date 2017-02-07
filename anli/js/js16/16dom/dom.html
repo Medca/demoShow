@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title></title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{padding:0;margin:0}
+				body{font-size:14px;font-family:"微软雅黑";padding:100px;}
+				a{text-decoration:none;color:#3333}
+				ul li{list-style:none;padding:10px;border:1px solid #ccc;margin-top:6px;}
+
+		  </style>
+
+	 </head>
+ <body>
+ <ul id="list">
+	<li color="red"><A href="">ssss</a></li>
+	<li color="green">2</li>
+	<li color="blue">3</li>
+	<li color="gray">4</li>
+	<li color="orange">5</li>
+	<li color="#111">6</li>
+</ul>
+
+
+<script type="text/javascript" src="dom.js"></script>
+<script>
+	_("list").eq(1).on("click",function(){
+		this.siblings(function(){
+			this.background("red").color("#fff").fontSize(34).skin("height","100px");
+		});
+	});
+
+	_("list").background("green");
+</script>
+ </body>
+</html>

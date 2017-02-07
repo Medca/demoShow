@@ -1,0 +1,44 @@
+<!doctype html><!--声明当前文档为html文档-->
+<html lang="en"><!--语言为英语-->
+	<head><!--头部-->
+		<meta charset="UTF-8"><!--字符编码：utf-8国际编码  gb2312中文编码-->
+		<meta name="Keywords" content="关键词">
+		<meta name="Description" content="描述">
+		<title>Document</title>
+		<style>/*css样式表的衣柜*/
+
+
+		</style>
+	</head>
+	<body><!--身体-->
+		<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 100" preserveAspectRatio="none"> <path d=""></path></svg>
+		<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 100" preserveAspectRatio="none"> <path d="M1000,0C1000,0,0,0,0,0C0,0,0,100,0,100C0,100,1000,100,1000,100"></path></svg>
+		<script>
+			var svgNS = "http://www.w3.org/2000/svg";
+			var svg = document.getElementById("svg");
+			var p = svg.getElementsByTagName("path")[0];
+			var x1 = 116,y1 = 97,x2 = 393,y2=100,
+				x3 = 681,y3=103,x4=593,y4=38,y5=0;
+			var x11 = 116,y11 = 97,x21 = 393,y21=100,
+				x31 = 681,y31=103,x41=593,y41=38,y51=0;
+			var x12 = 0,y12=100,x22=0,y22=100,x32=0,y32=100,
+				x42 = 1000,y42=100,y52 = 100;
+			
+			p.setAttribute("d","M1000,0C1000,0,0,0,0,0C0,0,"+x11+","+y11+","+x21+","+y21+"C"+x31+","+y31+","+x41+","+y41+",1000,"+y51);
+			svg.onclick = function(){
+				setInterval(function(){
+					x11 += (x12-x1)/100;if(x11<=x12)x11=x12;
+					y11 += (y12-y1)/100;if(y11>=y12)y11=y12;
+					x21 += (x22-x2)/100;if(x21<=x22)x21=x22;
+					y21 = y22;
+					x31 += (x32-x3)/100;if(x31<=x32)x31=x32;
+					y31 += (y32-y3)/100;if(y31<=y32)y31=y32;
+					x41 += (x42-x4)/100;if(x41>=x42)x41=x42;
+					y41 += (y42-y4)/100;if(y41>=y42)y41=y42;
+					y51 += (y52-y5)/100;if(y51>=y52)y51=y52;
+					p.setAttribute("d","M1000,0C1000,0,0,0,0,0C0,0,"+x11+","+y11+","+x21+","+y21+"C"+x31+","+y31+","+x41+","+y41+",1000,"+y51);
+				},100);
+			}
+		</script>
+	</body>
+</html>

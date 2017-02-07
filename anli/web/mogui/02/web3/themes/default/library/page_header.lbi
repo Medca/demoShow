@@ -1,0 +1,88 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{insert_scripts files='transport.js,utils.js'}
+<!--网站顶部开始-->
+<div id="TopMain">
+	<!-- 广告开始 -->
+	 <div id="topAdv"> 
+		<a href="#"> <img src="images/adv.jpg" /> </a> 
+		<img src="images/close.png"  class="close"/>
+	 </div>
+	<!-- 广告结束-->  
+
+	<!--Top开始-->
+	<div id="Top">
+		<div class="banner"><a href="#"><img src="images/logo.png" /></a></div>
+		
+		
+		
+		
+<!--search start-->
+
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+    {if $searchkeywords}
+   {$lang.hot_search} ：
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+
+		<div class="search">
+			<form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_r"  style="_position:relative; top:5px;">
+			 <select name="category" id="category" class="B_input" style="display:none">
+			  <option value="0">{$lang.all_category}</option>
+			  {$category_list}
+			</select>
+			
+				<input type="text"  class="txt" name="keywords" id="keyword" value="{$search_keywords|escape}"/>
+				<input type="submit" class="but"  value="" name="imageField"/>
+			</form>
+		</div>
+		<!--search end-->
+		
+		
+		
+		
+		
+		<div class="user">
+		
+		 {insert_scripts files='transport.js,utils.js'}
+   		 {insert name='member_info'}
+
+			<font><span class="iconfont">&#xe646;</span><a href="flow.php">查看物购车</a></font>
+		</div>
+	</div>
+	<!--Top结束-->
+</div>
+<!--网站顶部结束-->
+
+
+<!--导航开始-->
+<div id="Logo" >
+	<ul>
+		<li class="first"><span class="iconfont">&#xe627;</span>全部商品分类</li>
+		<li><a href="../index.php"{if $navigator_list.config.index eq 1} class="cur" {/if}>{$lang.home}</a></li>
+		 <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+		<li><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name}</a></li>
+ 		<!-- {/foreach} -->
+
+		<li class="last"></li>
+	</ul>
+</div>
+<!--导航结束-->

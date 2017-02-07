@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	 <head> 
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <title></title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				img{border:0}
+				.main{width:960px;line-height:30px;font-size:14px;font-family:"微软雅黑";margin:50px auto;}
+				.wb_share{position:absolute;display:none;}
+				.yy{width:100%;height:100%; position:absolute; background:rgba(0,0,0,0.5); top:0px; left:0px; display:none;}
+				.share{width:320px;height:320px; background:#ffffcc; position:fixed; left:500px; top:200px; display:none;}
+
+		  </style>
+	 </head>
+ <body>
+	<div class="main">
+			<p>在这份2014年军中反腐成绩单上，16只“军老虎”涉嫌严重违纪或违法犯罪。其中，除南京政治学院政治部主任马向东为大校军衔外，其余15人均为将军：徐才厚为上将，成都军区副司令员杨金山、兰州军区副政委范长秘、第二炮兵副政委于大清为中将，另外11人为少将。</p>
+
+			</p>徐才厚是十八大以来，军方级别最高的落马将领。2014年3月15日，徐才厚因涉嫌违纪问题接受组织调查。2014年6月30日，中央政治局会议决定开除徐才厚党籍，对其涉嫌受贿犯罪问题及问题线索移送最高人民检察院授权军事检察机关依法处理。</p>
+
+			<p>在这份2014年军中反腐成绩单上，16只“军老虎”涉嫌严重违纪或违法犯罪。其中，除南京政治学院政治部主任马向东为大校军衔外，其余15人均为将军：徐才厚为上将，成都军区副司令员杨金山、兰州军区副政委范长秘、第二炮兵副政委于大清为中将，另外11人为少将。</p>
+
+			<p>徐才厚是十八大以来，军方级别最高的落马将领。2014年3月15日，徐才厚因涉嫌违纪问题接受组织调查。2014年6月30日，中央政治局会议决定开除徐才厚党籍，对其涉嫌受贿犯罪问题及问题线索移送最高人民检察院授权军事检察机关依法处理。</p>
+	</div>
+	<img src="images/WB_logo.png" class="wb_share"/>
+	<div class="yy"></div>
+	<div class="share">
+		<iframe src="" width='340' height='340' id="shareCon" ></iframe>
+
+	</div>
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).mouseup(function(e){
+			var x = e.clientX;
+			var y = e.clientY;
+			var str = selectTxt();
+			if(str.length>10){
+				$(".wb_share").css({top:y,left:x}).show();
+			}
+			$(".wb_share").hide(5000);
+		});
+		
+		$(".wb_share").click(function(e){
+			e.stopPropagation();
+			$(this).hide();
+			$(".yy").show();
+			$(".share").show();
+			var address="地址链接"+window.location.href;
+			$("#shareCon").attr("src","w_share.php?con="+selectTxt()+"&address="+address);
+		});
+
+		$(".yy").click(function(){
+			$(".yy").hide();
+			$(".share").hide();
+		});
+
+		//返回我们选中的文字
+		function selectTxt(){
+
+			if(document.selection){
+				return document.selection.creatRange().text;  //针对Ie才生效
+			}else{
+				return window.getSelection().toString();
+			}
+		}
+	</script>
+ </body>
+</html>

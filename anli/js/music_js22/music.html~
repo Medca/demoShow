@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title></title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{padding:0;margin:0}
+				a{text-decoration: none;color: #333}
+				body{font-family: "微软雅黑";font-size:24px;padding:100px;}
+				ul li{list-style:none;}
+				.prograss{width:640px;height:30px;background:#111;position:relative;}
+				.prograss .percent{height:30px;background:green;width:0%;position:absolute;top:0;left:0;}
+				.prograss .bar{height:30px;background:red;width:20px;position:absolute;top:0;left:0;z-index:2}
+				.prograss .overlay{height:30px;background:transparent;width:100%;position:absolute;top:0;left:0;z-index:1}
+				.w100{width:200px;margin-top:10px;}
+		  </style>
+
+	 </head>
+ <body>
+  <audio id="audio" oncanplaythrough="canplay()"  src="01.mp3"></audio>
+  	<div >总时长：<span id="ttime"></span></div>
+  	<div >播放时间：<span id="ctime"></span></div>
+  	<div >剩余时间：<span id="stime"></span></div>
+  	<div >
+  		<a href="javascript:void(0);" id="play">播放</a>
+  		<a href="javascript:void(0);" id="stop" style="display: none">暂停</a>
+  		<a href="javascript:void(0);" id="stopv">静音</a>
+  		<a href="javascript:void(0);" id="openv" style="display: none">开启音量</a>
+  		<div id="pbox" class="prograss">
+  			<div class="percent"></div>
+  			<div class="bar"></div>
+  			<div class="overlay"></div>
+  		</div>
+  		
+  		<div id="vbox" class="prograss w100">
+  			<div class="percent" style="width: 100%;"></div>
+  			<div class="bar" style="left: 90%;"></div>
+  			<div class="overlay"></div>
+  		</div>
+  		<span id="juli"></span>
+  		<ul>
+  			<li></li>
+  			<li></li>
+  			<li></li>
+  		</ul>
+  	</div>
+  	
+  	<script type="text/javascript">
+  		window.onload = function(){
+  			var audioDom = document.getElementById("audio");
+  			//进度条对象
+  			drag("pbox",function(zw,tw){
+  				var per = zw/tw;
+  				this.children[0].style.width = per *100+"%";
+  				this.children[1].style.left = (zw / (tw+20))  *100+"%";
+ 				var ctime = $("audio").duration * per;
+ 				audioDom.currentTime = ctime;
+  			},function(zw,tw){
+  				var per = zw/tw;
+  				this.children[0].style.width = per *100+"%";
+  				this.children[1].style.left = (zw / (tw+20))  *100+"%";
+ 				var ctime = $("audio").duration * per;
+ 				audioDom.currentTime = ctime;
+  			});
+  			
+  			//音量
+  			drag("vbox",function(zw,tw){
+  				var per = zw/tw;
+  				audioDom.volume = per;
+  				this.children[0].style.width = per *100+"%";
+  				this.children[1].style.left = (zw / (tw+20))  *100+"%";
+  				
+  			},function(zw,tw){
+  				var per = zw/tw;
+  				audioDom.volume = per;
+  				this.children[0].style.width = per *100+"%";
+  				this.children[1].style.left = (zw / (tw+20)) *100+"%";
+  			});
+  			
+  			//播放
+  			$("play").onclick = function(){
+  				audioDom.play();
+  				$("stop").style.display ="block";
+  				$("play").style.display ="none";
+  				
+  			};
+  			
+  			//暂停
+  			$("stop").onclick = function(){
+  				audioDom.pause();
+  				$("stop").style.display ="none";
+  				$("play").style.display ="block";
+  			};
+  			
+  			//静音
+  			$("stopv").onclick = function(){
+  				audioDom.muted = true;
+  				$("openv").style.display ="block";
+  				$("stopv").style.display ="none";
+  			};
+  			
+  			//开启音量
+  			$("openv").onclick = function(){
+  				audioDom.muted = false;
+  				$("openv").style.display ="none";
+  				$("stopv").style.display ="block";
+  			};
+  			
+  			
+  			audioDom.ontimeupdate = function(){
+  				var ctime = this.currentTime;
+  				var ttime = this.duration;
+  				$("ctime").innerHTML = getTime(ctime);
+  				$("stime").innerHTML = getTime(ttime - ctime);
+  				var percent = (ctime / ttime) * 100;
+  				$("pbox").children[0].style.width = percent+"%";
+  				$("pbox").children[1].style.left = percent+"%";
+  			};
+  			
+  			/*
+  			audioDom.onvolumechange = function(){
+  				//alert("音量改变了哦!!");
+  			};
+  			
+  			
+  			audioDom.onplaying = function(){
+  				alert("play");
+  			};
+  			
+  			audioDom.onpause = function(){
+  				
+  				alert("stop");
+  			};
+  			*/
+  			
+  		};
+  		
+  		
+  		function drag(id,callback,callback2){
+  			var pdom = $(id);
+  			pdom.children[1].onmousedown = function(e){
+  				var barDom = this;
+  				var ev = e || window.event;
+  				//鼠标的位置
+  				var x = ev.clientX;
+  				//left坐标
+  				var l = barDom.offsetLeft;
+  				//最大距离
+  				var mw = pdom.offsetWidth - barDom.offsetWidth;
+  				document.onmousemove = function(e){  					
+  					var ev = e || window.event;
+  					var nl = ev.clientX - x +l;
+  					if(nl<=0)nl = 0;
+  					if(nl>mw)nl = mw;
+  					barDom.style.left = nl+"px";
+  					if(callback)callback.call(pdom,nl,mw);
+  				};
+  				
+  				document.onmouseup = function(){
+  					document.onmousemove = null;
+  					document.onmouseup =null; 
+  				};
+  			};
+  			
+  			pdom.children[2].onmousedown = function(e){
+  				var ev = e || window.event;
+  				//鼠标的位置
+  				var x = ev.clientX;
+  				var juli = x - pdom.offsetLeft;
+  				if(callback2)callback2.call(pdom,juli,pdom.offsetWidth);
+  			};
+  		}
+  		
+  		
+  		/*
+  			事件:
+  			oncanplaythrough：代表如果你页面文件加载成功以后执行的回调函数
+  			ontimeupdate:代表监听播放中的事件
+  			onvolumechange:改变音量的时候执行的回调函数
+  			
+  			方法：
+  			play()播放
+  			pause()暂停
+  			
+  			属性:
+  			duration:总时长，(秒)
+  			currentTime:当前正在播放的时间(秒)
+  		*/
+  		function canplay(){
+  			var dtimer = $("audio").duration;
+  			$("ttime").innerHTML = getTime(dtimer);
+  		}
+  		
+  		function getTime(timer){
+  			var m = parseInt(timer / 60);
+  			var s = parseInt(timer % 60);
+  			m = m < 10 ?"0"+m:m;
+  			s = s < 10 ?"0"+s:s;
+  			return m+":"+s;
+  		};
+  		
+  		function $(id){
+  			return document.getElementById(id);
+  		};
+  	</script>
+ </body>
+</html>
+

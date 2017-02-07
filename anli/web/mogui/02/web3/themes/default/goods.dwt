@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="ecshop商城开发">
+  <meta name="Description" content="打造商城">
+  <title>Ecshop商城开发详情页</title>
+ <!--引用外部样式-->
+ <link type="text/css" rel="stylesheet"  href="themes/default/style.css">
+ <link type="text/css" rel="stylesheet"  href="themes/default/css/web.css">
+
+ {* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+ <script type="text/javascript">
+function $id(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onclick=function(){
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+
+</script>
+ </head>
+ <body>
+
+
+
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+
+
+
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+
+
+
+<!--内容页主体开始-->
+<div id="webCon">
+
+	<!--产品放大镜效果开始-->
+	<div class="web_ProductImg">
+	
+		<div id="box">
+
+			<!--小图展示 start-->
+			<div class="simg">
+			 <!-- {if $pictures}-->
+     		 <img src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}" width="450" height="450"/>
+         	<!-- {else} -->
+        	<img src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}" width="450" height="450"/>
+         	<!-- {/if}-->
+		 
+				<span class="move"></span>
+				<span class="shade"></span>
+			</div>
+			<!--小图展示 end-->
+
+			<!--按扭 start-->
+			<div class="but">
+				<!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem -->
+			</div>
+			<!--按扭 end-->
+
+			<!--大图 start-->
+			<div class="bimg">
+				<!-- {if $pictures}-->
+				<img src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}" />
+				<!-- {else} -->
+				<img src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}" />
+				<!-- {/if}--> 
+			</div>
+			<!--大图 end-->
+
+		</div>
+	
+	</div>
+	<!--产品放大镜效果结束-->
+	
+	
+	
+	
+	
+
+
+	<div class="web_ProductXq">
+	<form action="javascript:addToCart({$goods.goods_id})" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+		<ul>
+			<li class="title"> {$goods.goods_style_name}<!--商品标题--></li>
+			<!-- {if $promotion} -->
+			<li>
+				 <!-- {foreach from=$promotion item=item key=key} 优惠活动-->
+		  {$lang.activity}
+		  <!-- {if $item.type eq "snatch"} -->
+		  <a href="snatch.php" title="{$lang.snatch}" style="font-weight:100; color:#006bcd; text-decoration:none;">[{$lang.snatch}]</a>
+		  <!-- {elseif $item.type eq "group_buy"} -->
+		  <a href="group_buy.php" title="{$lang.group_buy}" style="font-weight:100; color:#006bcd; text-decoration:none;">[{$lang.group_buy}]</a>
+		  <!-- {elseif $item.type eq "auction"} -->
+		  <a href="auction.php" title="{$lang.auction}" style="font-weight:100; color:#006bcd; text-decoration:none;">[{$lang.auction}]</a>
+		  <!-- {elseif $item.type eq "favourable"} -->
+		  <a href="activity.php" title="{$lang.favourable}" style="font-weight:100; color:#006bcd; text-decoration:none;">[{$lang.favourable}]</a>
+		  <!-- {/if} -->
+		  <a href="{$item.url}" title="{$lang.$item.type} {$item.act_name}{$item.time}" style="font-weight:100; color:#006bcd;">{$item.act_name}</a><br />
+		  <!-- {/foreach} -->
+			</li>
+			<!-- {/if} -->
+			<li class="two">
+				<!-- {if $cfg.show_goodssn} 显示商品货号-->
+				<p><strong>{$lang.goods_sn}</strong>{$goods.goods_sn}</p>
+				 <!-- {/if} -->
+				 <!-- {if $goods.goods_number neq "" and $cfg.show_goodsnumber} 商品库存-->
+        <!-- {if $goods.goods_number eq 0} -->
+          <p><strong>{$lang.goods_number}</strong>
+          <font color='red' style="font-size:20px;">{$lang.stock_up}</font></p>
+        <!-- {else} -->
+          <p><strong>{$lang.goods_number}</strong>
+          {$goods.goods_number} {$goods.measure_unit}</p>
+        <!-- {/if} -->
+      <!-- {/if} -->
+			</li>
+			<li class="two">
+			 <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
+				<p><strong>{$lang.goods_brand}</strong><a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a></p>
+				<!--{/if}-->
+		<!-- {if $cfg.show_goodsweight} 商品重量-->
+       		<p><strong>{$lang.goods_weight}</strong>{$goods.goods_weight}</p>
+       <!-- {/if} -->
+			</li>
+			<li  class="bor">
+				<p>
+				<!-- {if $cfg.show_marketprice} 市场价格-->
+       <strong>{$lang.market_price}</strong><font class="market">{$goods.market_price}</font>
+       <!-- {/if} -->
+       <!--本店售价-->
+       <strong>{$lang.shop_price}</strong><font class="shop" id="ECS_SHOPPRICE" style="font-size:20px; color:#FF3366;">{$goods.shop_price_formated}</font>
+       <!-- {foreach from=$rank_prices item=rank_price key=key} 会员等级对应的价格-->
+       <strong>{$rank_price.rank_name}：</strong><font class="shop" id="ECS_RANKPRICE_{$key}">{$rank_price.price}</font>
+       <!--{/foreach}-->
+				</p>
+			</li>
+			
+			<!--{if $goods.is_promote and $goods.gmt_end_time } 促销-->
+			  {insert_scripts files='lefttime.js'}
+			  <li class="padd loop" style="margin-bottom:5px; border-bottom:1px dashed #ccc;">
+				  <strong>{$lang.promote_price}</strong><font class="shop">{$goods.promote_price}</font>
+				  <strong>{$lang.residual_time}</strong>
+				  <font class="f4" id="leftTime" style="color:red;">{$lang.please_waiting}</font>
+			  </li>
+			  <!--{/if}-->
+			
+			
+			
+			
+			<li class="yh">
+			<!--{if $volume_price_list } -->
+				<h3>购买商品达到以下数量区间时可享受的优惠价格：</h3>
+				<p class="ti"> <span>{$lang.number_to}</span> <span>{$lang.preferences_price}</span> </p>
+				<!-- {foreach from=$volume_price_list item=price_list key=price_key} -->
+		<p class="ti money"> <span>{$price_list.number}</span> <span>{$price_list.format_price}</span> </p>
+				 <!-- {/foreach} -->
+				 <!--{/if}-->
+				<p class="allmoney"> 
+				<strong>{$lang.amount}：</strong><font id="ECS_GOODS_AMOUNT" class="shop"></font>
+				</p>
+			</li>
+			 
+			 
+			 
+	
+	  
+		
+			<li class="two">
+			
+				<p>购买数量 <input name="number" type="text" id="number" value="1"  onblur="changePrice()" class="txt"/>
+				 </p>
+				<!-- {if $goods.give_integral > 0} 购买此商品赠送积分-->
+        <p><strong>{$lang.goods_give_integral}</strong><font class="f4">{$goods.give_integral} {$points_name}</font></p>
+        <!-- {/if} --> 
+			</li>
+			
+			   <!-- {if $goods.bonus_money} 红包-->
+			  <li class="padd loop" style="margin-bottom:5px; border-bottom:1px dashed #ccc;">
+			  <strong>{$lang.goods_bonus}</strong><font class="shop">{$goods.bonus_money}</font><br />
+			  </li>
+			  <!-- {/if} -->
+			
+			<!-- {* 开始循环所有可选属性 *} -->
+      <!-- {foreach from=$specification item=spec key=spec_key} -->
+      <li class="padd loop">
+	  <p class="sx">
+      <strong>{$spec.name}:</strong><br />
+        <!-- {* 判断属性是复选还是单选 *} -->
+                    <!-- {if $spec.attr_type eq 1} -->
+                      <!-- {if $cfg.goodsattr_style eq 1} -->
+                        <!-- {foreach from=$spec.values item=value key=key} -->
+                        <label for="spec_value_{$value.id}">
+                        <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} onClick="changePrice()" />
+                        {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                        <!-- {/foreach} -->
+                        <input type="hidden" name="spec_list" value="{$key}" />
+                        <!-- {else} -->
+                        <select name="spec_{$spec_key}" onChange="changePrice()">
+                          <!-- {foreach from=$spec.values item=value key=key} -->
+                          <option label="{$value.label}" value="{$value.id}">{$value.label} {if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if}{if $value.price neq 0}{$value.format_price}{/if}</option>
+                          <!-- {/foreach} -->
+                        </select>
+                        <input type="hidden" name="spec_list" value="{$key}" />
+                      <!-- {/if} -->
+                    <!-- {else} -->
+                      <!-- {foreach from=$spec.values item=value key=key} -->
+                      <label for="spec_value_{$value.id}">
+                      <input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onClick="changePrice()" />
+                      {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label><br />
+                      <!-- {/foreach} -->
+                      <input type="hidden" name="spec_list" value="{$key}" />
+                    <!-- {/if} -->
+		</p>
+      </li>
+      <!-- {/foreach} -->
+      <!-- {* 结束循环可选属性 *} -->
+	  
+			
+			<li class="but">
+				<a href="javascript:addToCart({$goods.goods_id})"><img src="images/Webcar.png" /></a>
+				<a href="javascript:collect({$goods.goods_id})"><img src="images/Websc.png" /></a>
+			</li>
+
+		</ul>
+	
+	
+	</form>
+	</div>
+	
+<div style="clear:both"></div>	
+</div>
+
+<!--内容主体结束-->
+
+
+<!--推荐产品开始-->
+<!-- #BeginLibraryItem "/library/goods_related.lbi" --> <!-- #EndLibraryItem -->
+<!--推荐产品结束-->
+
+
+<!--产品详情开始-->
+<div id="ProductInfo">
+
+	<ul class="sel">
+		<li class="active">商品描述<span></span></li>
+		<li>商品属性 <span></span></li>
+		<li>用户评论<span></span></li>
+		<li>商品购买记录<span></span></li>
+	</ul>
+
+	<div id="ProductSelect">
+		<div class="selCon" style="display:block;">  {$goods.goods_desc}</div>
+		<div class="selCon">
+		
+		
+		 <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#dddddd">
+        <!-- {foreach from=$properties item=property_group key=key} -->
+        <tr>
+          <th colspan="2" bgcolor="#FFFFFF">{$key|escape}</th>
+        </tr>
+        <!-- {foreach from=$property_group item=property} -->
+        <tr>
+          <td bgcolor="#FFFFFF" align="left" width="30%" class="f1">[{$property.name|escape:html}]</td>
+          <td bgcolor="#FFFFFF" align="left" width="70%">{$property.value}</td>
+        </tr>
+        <!-- {/foreach}-->
+        <!-- {/foreach}-->
+      </table>
+	  
+			 
+		</div>
+		<div class="selCon"><!-- #BeginLibraryItem "/library/comments.lbi" --><!-- #EndLibraryItem --></div>
+		<div class="selCon">
+			<!-- #BeginLibraryItem "/library/bought_note_guide.lbi" --> <!-- #EndLibraryItem -->
+		</div>
+	</div>
+	
+
+</div>
+<!--产品详情结束-->
+
+
+
+
+
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+
+
+
+
+
+
+<script type="text/javascript">
+var goods_id = {$goods_id};
+var goodsattr_style = {$cfg.goodsattr_style|default:1};
+var gmt_end_time = {$promote_end_time|default:0};
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var goodsId = {$goods_id};
+var now_time = {$now_time};
+
+
+
+<!-- {literal} -->
+onload = function(){
+  changePrice();
+  fixpng();
+  try { onload_leftTime(); }
+  catch (e) {}
+}
+
+/**
+ * 点选可选属性或改变数量时修改商品价格的函数
+ */
+function changePrice()
+{
+  var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+  var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+
+  Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
+
+/**
+ * 接收返回的信息
+ */
+function changePriceResponse(res)
+{
+  if (res.err_msg.length > 0)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+    document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
+
+    if (document.getElementById('ECS_GOODS_AMOUNT'))
+      document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+  }
+}
+<!-- {/literal} -->
+</script>
+   <script type="text/javascript">
+    <!--
+    reg("com");
+    //-->
+    </script>
+
+
+ {insert_scripts files='transport.js,utils.js'}
+ {insert_scripts files='jquery.js'}
+
+
+<script type="text/javascript">
+	$(".but img").mouseover(function(){
+		//鼠标滑动到对图片按扭，图片加上红色边框，其它去掉边框
+		$(this).addClass("active").siblings("img").removeClass("active"); 
+
+		
+		var bimg=$(this).attr("dataSrc");//获取小图片按扭对应的大图片地址
+		$(".simg img,.bimg img").attr("src",bimg); //给小图片和大图展示赋值 
+		
+
+	});
+
+
+
+	//鼠标滑动到遮罩层上.shade 时 ，的操作
+	$("#box .simg .shade").hover(function(){
+		$(".simg span.move,.bimg").show(); //小滑块和大图展示显示
+	},function(){
+		$(".simg span.move,.bimg").hide();//小滑块和大图展示隐藏
+	});
+
+	//当鼠标在遮罩层上.shade 移动时，动态来获取 小滑块的位置
+	$("#box .simg .shade").mousemove(function(e){
+		
+		var x=e.clientX;  //鼠标与浏览器窗口左边距离
+		var y=e.clientY+$(window).scrollTop(); //鼠标与浏览器窗口上面距离
+
+
+		var l=$(this).offset().left;  //获取.shade与浏览器窗口左边距离
+		var t=$(this).offset().top;  //获取 .shade 与浏览器窗口上边距离
+		
+
+		var w=$(".simg span.move").width()/2;  //获取小滑块宽度的一半
+		var h=$(".simg span.move").height()/2; //获取小滑块高度的一半
+
+
+		var _left=x-l-w;  //小滑块与 .shade 左边的距离
+		var _top=y-t-h;  //小滑块与 .shade 上面的距离
+
+
+		var bigW=$("#box .simg .shade").width()-w*2-2;  //滑块能滑动的最大宽度
+		var bigH=$("#box .simg .shade").height()-h*2-2; //滑块能滑动的最大高度
+		//document.title=_left+"="+_top;
+		//通过_top判断，小滑块在竖直方向不能移出去 
+		if(_top<0){
+			_top=0; 
+		}else if(_top>bigH){
+			_top=bigH;
+		}
+
+		//通_left值判断 ，小滑块在水平方向不能移出去
+		if(_left<0){
+			_left=0;
+		}else if(_left>bigW){
+			_left=bigW;
+		}
+
+		//给小滑块赋值 top  left
+		$(".simg span.move").css({"left":_left,"top":_top});
+
+
+		//获以滑块滑动的宽度和高度的比例
+		var wbl=_left/bigW;  //滑动宽度和最大滑动的宽度比例
+		var hbl=_top/bigH;  //滑动高度和最大滑动的高度比例
+
+		//document.title=wbl;
+
+		var bigLeft=($(".bimg img").width()-$(".bimg").width())*wbl;  //大图向左移动距离
+		var bigTop=($(".bimg img").height()-$(".bimg").height())*hbl;  //大图向上移动距离
+
+		$(".bimg img").css({"left":-bigLeft,"top":-bigTop}); //动态给大图赋值
+
+		
+	});
+
+</script>
+
+<script type="text/javascript">
+//选项卡效果
+$("#ProductInfo ul.sel li").mouseover(function(){
+	var _index=$(this).index();
+	$(this).addClass("active").siblings("li").removeClass("active");
+	$("#ProductSelect .selCon").eq(_index).show().siblings("div").hide();
+
+});
+
+</script>
+
+
+
+<!--
+	1、在News大盒子里面，构建两个一样大小的长方形，一个用来设背景透明，一个利用绝定位，盖在透明
+	图层上面，用来放内容
+	2、利用 h3标签来制作标题部分（颜色，大小，字体类型，竖直居中，首行缩进text-indent:20px;）
+	3、利用 ul来制作新闻列表，文字竖直间距利用行高 line-height:30px;  给 ul添加对应的内边距，使文字与上右下左产生一定的间距。
+	4、给文字加上了 a标签超链接，如何优化我们代码，代码的性能,如果把常用样式，统一初始化，我们选择的是用标签来表达，而不是用 *
+-->
+
+
+
+
+ </body>
+</html>

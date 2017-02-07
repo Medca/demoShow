@@ -1,0 +1,184 @@
+
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";background:#111}
+	
+	
+	@-webkit-keyframes rip{
+		0%{opacity:0;-webkit-transform:scale(0)}
+		20%{opacity:1;-webkit-transform:scale(1.5);}
+		50%{opacity:1;-webkit-transform:scale(2);}
+		100%{opacity:0;-webkit-transform:scale(3);}
+	}
+
+	@-ms-keyframes rip{
+		0%{opacity:0;-ms-transform:scale(0)}
+		20%{opacity:1;-ms-transform:scale(1.5);}
+		50%{opacity:1;-ms-transform:scale(2);}
+		100%{opacity:0;-ms-transform:scale(3);}
+	}
+	@-moz-keyframes rip{
+		0%{opacity:0;-moz-transform:scale(0)}
+		20%{opacity:1;-moz-transform:scale(1.5);}
+		50%{opacity:1;-moz-transform:scale(2);}
+		100%{opacity:0;-moz-transform:scale(3);}
+	}
+	@keyframes rip{
+		0%{opacity:0;transform:scale(0)}
+		20%{opacity:1;transform:scale(1.5);}
+		50%{opacity:1;transform:scale(2);}
+		50%,100%{opacity:0;transform:scale(3);}
+	}
+
+
+	#box{
+		border:8px solid #fff;width:120px;height:120px;margin:100px auto;border-radius:50%;position:absolute;left:0;top:0;bottom:0;right:0;}
+
+	#play{width:80px;height:80px;display:block;margin:18px;color:#fff;text-align:center;line-height:80px;font-size:48px;padding-left:5px;}
+
+	#pause{width:80px;height:80px;display:block;margin:18px;color:#fff;text-align:center;line-height:80px;font-size:48px;padding-left:5px;display:none;}
+
+	#ripbox{position:absolute;display:block;top:0;left:0;width:100%;height:100%;border-radius:50%;transform:scale(1);opacity:0;z-index:-1;box-shadow: 
+			inset 0 0 .375em rgba(255, 255, 255, 0.75),  
+			0 0 2.375em rgba(255, 255, 255, 0.75)
+	}
+
+
+	.rip{
+		-webkit-animation:rip 2s infinite ease;
+		-moz-animation:rip 2s infinite ease;
+		-ms-animation:rip 2s infinite ease;
+		animation:rip 2s infinite ease;
+	}
+
+	/*
+		改变什么：是这个最重要
+		改变一个元素的位置---位移运动 top left 比如：弹出，banner
+		改变一个元素宽度和高度---折叠
+		元素的opacity--淡入淡出
+	*/
+
+	#musicbox{position:absolute;top:0;left:0;display:none;color:#fff;}
+  </style>
+ </head>
+ <body>
+  
+	
+	<audio id="audio" src="01.mp3"></audio>
+	<div id="box">
+		<span id="play"><i class="fa fa-play"></i></span>
+		<span id="pause"><i class="fa fa-pause"></i></span>
+		<div id="ripbox"></div>
+		<div id="musicbox"><i class="fa fa-fighter-jet"></i></div>
+	</div>
+
+	<script type="text/javascript">
+			function playMusic(){
+				//拿到大盒子
+				var boxDom = document.getElementById("box");
+				//领头盒子
+				var musicBox = document.getElementById("musicbox");
+				//光晕盒子
+				var ripBox = document.getElementById("ripbox");
+				//切换播放按钮
+				var playDom = document.getElementById("play");
+				var pauseDom = document.getElementById("pause");
+				//音乐对象
+				var aduioDom = document.getElementById("audio");
+				//动画变量
+				var timer = null;
+				//装载数组的小球
+				var arr = [];
+
+				playDom.onclick = function(){
+					musicBox.style.display = "block";
+					ripBox.className = "rip";
+
+					//播放音乐
+					aduioDom.play();
+					playDom.style.display = "none";
+					pauseDom.style.display = "block";
+					draw();
+				};
+
+
+				pauseDom.onclick = function(){
+					ripBox.className = "";
+					aduioDom.pause();
+					playDom.style.display = "block";
+					pauseDom.style.display = "none";
+					boxDom.style.border = "4px solid #fff";
+					clearInterval(timer);
+					musicBox.style.display = "none";
+					for(var i;i<arr.length;i++){
+						boxDom.removeChild(arr[i]);
+					}
+					arr = [];
+				};
+
+				function draw(){
+					var x = 60;
+					var y = 60;
+					var radius = 60;
+					var angle = 0;
+					var speed = 0.05;
+					timer = setInterval(function(){
+						var ndiv = document.createElement("div");
+						var top = y + Math.sin(angle)*radius;
+						var left = x + Math.cos(angle)*radius;
+
+						////musicBox.style.background = randomColor16();
+						musicBox.style.top = top + "px";
+						musicBox.style.left = left + "px";
+						boxDom.style.border = "none";
+						ndiv.style.position="absolute";
+						//ndiv.style.background = "#fff";//randomColor16()
+						ndiv.style.border = "1px solid #fff";
+						ndiv.style.top = (musicBox.offsetTop)+"px";
+						ndiv.style.left = (musicBox.offsetLeft)+"px";
+						boxDom.appendChild(ndiv);
+						arr.push(ndiv);
+						if(arr.length >110){
+							var n = arr.shift();
+							boxDom.removeChild(n);
+						}
+						angle+=speed;
+					},30);
+				}
+			};
+			playMusic();
+			
+			function random(num){
+				return Math.floor(Math.random()*(num+1));
+			};
+
+			function randomRange(start,end){
+				return Math.floor(Math.random()*(end-start+1))+start;
+			};
+
+			function randomColor16(){
+				//0-255	
+				var r = random(255).toString(16);
+				var g = random(255).toString(16);
+				var b = random(255).toString(16);
+				//255的数字转换成十六进制
+				if(r.length<2)r = "0"+r;
+				if(g.length<2)g = "0"+g;
+				if(b.length<2)b = "0"+b;
+				return "#"+r+g+b;
+			}
+
+	</script>
+
+ </body>
+</html>

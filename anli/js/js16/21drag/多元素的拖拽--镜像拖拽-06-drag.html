@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#3333}
+	.box{position:absolute;top:0;left:0;width:200px;height:200px;background:red;font-size:12px;color:#fff;text-align:center;}
+	.box h1{background:#111;font-size:14px;height:45px;line-height:45px;text-align:left;padding-left:5px;cursor:move;}
+ </style>
+ </head>
+ <body>
+	
+	
+	
+
+	<div id="box" class="box">
+		<h1>我是标题1</h1>
+		1随意拖拽
+	</div>
+	
+	<div id="box1" class="box">
+		<h1>我是标题1</h1>
+		1随意拖拽234
+	</div>
+	
+	<div id="box2" class="box">
+		<h1>我是标题1</h1>
+		1随意拖拽2342
+	</div>
+	
+	<div id="box3" class="box">
+		<h1>我是标题1</h1>
+		1随意拖拽23423
+	</div>
+	
+
+	
+
+	
+	
+	<script type="text/javascript" src="dom.js"></script>
+	<script>
+		window.onload = function(){
+			var drag = new Drag();
+			drag.init({id:"box"});
+
+			var drag1 = new Drag();
+			drag1.init({id:"box1",handler:1});
+
+			var drag2 = new Drag();
+			drag2.init({id:"box2",handler:1,ghsot:false});
+
+			var drag3 = new Drag();
+			drag3.init({id:"box3",handler:1,callback:function(){
+				this.style.background = "#111";
+			}});
+		};
+		
+
+		//拖拽的构造函数
+		function Drag(){
+			
+		}
+		//元素拖拽三要素：
+		//1:加定位 position:absolute/fixed; 改变的元素:left 和top
+		//2:绑定事件:onmousedown (onmousemove onmouseup)---document
+		//3:清空鼠标事件
+		var dragZindex = 0;
+		Drag.prototype.init = function(options){
+			var dragObj = this;
+			//参数的混入 jquery $.extend
+			var opts = mix({},{
+					arrow:"",
+					handler:"",
+					parent:"",
+					position:"relative",
+					ghsot:true
+			},options);
+			var boxDom = dom(opts.id);
+			//父元素
+			var parentDom = dom(opts.id);
+			if(opts.handler){
+				boxDom = boxDom.children[opts.handler*1-1];
+			}
+			
+			//获取父盒子对象	
+			var parentBoxDom = dom(opts.parent);
+			if(parentBoxDom)parentBoxDom.style.position = opts.position;
+
+			var mark  = false;
+			boxDom.onmousedown = function(e){
+				
+				//层级关系处理
+				parentDom.style.zIndex = ++dragZindex;
+				//拿到元素的位置
+				var sleft = parentDom.offsetLeft;
+				var stop = parentDom.offsetTop;
+				//获取最大的距离
+				var maxWidth  = Math.max(window.innerWidth,document.body.clientWidth);
+				var maxHeight  = Math.max(window.innerHeight,document.body.clientHeight);
+				var maxLeft = (parentBoxDom?parentBoxDom.offsetWidth:maxWidth) - parentDom.offsetWidth;
+				var maxTop = (parentBoxDom?parentBoxDom.offsetHeight:maxHeight) -parentDom.offsetHeight;//潜在的问题?
+				//拿到鼠标的位置
+				var pos = getXY(e);
+				mark = true;
+				//镜像处理
+				var ghsotDom = null;
+				if(opts.ghsot) ghsotDom = ghostDiv(parentDom);
+				document.onmousemove = function(e){
+					if(mark){
+						//移动鼠标的位置
+						var pos2 = getXY(e);
+						var nleft = pos2.x - pos.x + sleft;
+						var ntop = pos2.y - pos.y + stop;
+						//边界判断
+
+						if(nleft<=0)nleft = 0;
+						if(ntop<=0)ntop = 0;
+						if(nleft>=maxLeft)nleft = maxLeft;
+						if(ntop>=maxTop)ntop = maxTop;
+						//改变位置
+						if(opts.arrow=="left"){
+							(ghsotDom || parentDom).style.left = nleft+"px";
+						}else if(opts.arrow=="top"){
+							(ghsotDom || parentDom).style.top = ntop+"px";
+						}else{
+							(ghsotDom || parentDom).style.left = nleft+"px";
+							(ghsotDom || parentDom).style.top = ntop+"px";
+						}
+					}
+				};
+				
+				//鼠标松开的时候，释放拖动
+				document.onmouseup = function(){
+					this.onmousemove = null;
+					this.onmouseup = null;
+					mark = false;
+					if(opts.ghsot){
+						parentDom.style.left = ghsotDom.offsetLeft+"px";
+						parentDom.style.top = ghsotDom.offsetTop+"px";
+						document.body.removeChild(ghsotDom);
+					}
+					if(opts.callback)opts.callback.call(parentDom);
+
+				};
+			};	
+
+			function ghostDiv(parentDom){
+				/*
+				var cloneDom = document.createElement("div");
+				with(cloneDom.style){
+					cloneDom.id = "cloneDiv";
+					width = parentDom.offsetWidth+"px";
+					left = parentDom.offsetLeft+"px";
+					top = parentDom.offsetTop+"px";
+					height = parentDom.offsetHeight+"px";
+					border = "2px dashed #111";
+					position = "absolute";
+					background = "red";
+					opacity = "0.1";
+					zIndex = 999999;
+				};
+				cloneDom.innerHTML = parentDom.innerHTML;
+				if(dom("cloneDiv"))document.body.removeChild(dom("cloneDiv"));*/
+				var cloneDom = parentDom.cloneNode(true);
+				cloneDom.style.opacity= "0.2";
+				document.body.appendChild(cloneDom);
+				return cloneDom;
+			}
+		};
+
+
+		
+	</script>
+ </body>
+</html>

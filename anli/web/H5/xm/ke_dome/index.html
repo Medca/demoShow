@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--手机显示清晰-->
+		  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		  <!--当前页面的三要素-->
+		  <title>首页</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <link rel="stylesheet" href="css/style.css"/>
+		  <link rel="stylesheet" media="screen and (max-width:600px)" href="css/small.css"/>
+	 </head>
+ <body>
+  <div class="page_nav jq_page_nav">
+	<div class="portrait">
+		<a href="#">
+			<div class="head_portrait"> <img src="images/head.png"/></div>
+			<div class="mark">&rsaquo;</div>
+		</a>
+		<p>请登陆</p>
+	</div>
+
+	<nav>
+		<ul>
+			<li>
+				<a href="#">
+					<div class="nav_img"><img src="images/nav_01.png"/></div>
+					<div class="nav_title">课程首页</div>
+				</a>
+			</li>
+			<li>
+				<a href="category.html">
+					<div class="nav_img"><img src="images/nav_02.png"/></div>
+					<div class="nav_title">我的课程</div>
+				</a>
+			</li>
+			<li>
+				<a href="coursePack.html">
+					<div class="nav_img"><img src="images/nav_03.png"/></div>
+					<div class="nav_title">课程资料</div>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<div class="nav_img"><img src="images/nav_04.png"/></div>
+					<div class="nav_title">离线缓存</div>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<div class="nav_img"><img src="images/nav_05.png"/></div>
+					<div class="nav_title">设置</div>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+  </div>
+  <div class="page jq_page">
+	<header class="head">
+		<a class="menu jq_menu"></a>
+		<h1 class="font_2 color_fff"">首页</h1>
+	</header>
+
+	<!--区域空间-->
+	<section>
+		<div class="classify">
+			<ul>
+				<li>
+					<a href="category.html">
+						<img src="images/ke_01.png"/>
+						<p>Java</p>
+					</a>
+				</li>
+				<li>
+					<a href="category.html">
+						<img src="images/ke_02.png"/>
+						<p>Javascript</p>
+					</a>
+				</li>
+				<li>
+					<a href="category.html">
+						<img src="images/ke_03.png"/>
+						<p>Jquery</p>
+					</a>
+				</li>
+				<li>
+					<a href="category.html">
+						<img src="images/ke_04.png"/>
+						<p>Html5</p>
+					</a>
+				</li>
+				<li>
+					<a href="category.html">
+						<img src="images/ke_05.png"/>
+						<p>SQL</p>
+					</a>
+				</li>
+				<li>
+					<a href="category.html">
+						<img src="images/ke_06.png"/>
+						<p>Android</p>
+					</a>
+				</li>
+				<li>
+					<a href="category.html">
+						<img src="images/ke_07.png"/>
+						<p>IOS</p>
+					</a>
+				</li>
+				<li>
+					<a href="category.html">
+						<img src="images/ke_08.png"/>
+						<p>SEO</p>
+					</a>
+				</li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class=" classify_bottom"></div>
+	</section>
+
+	<div class="courses_line">
+		<div class="line"></div>
+		<div class="courses">推荐课程</div>
+	</div>
+
+	<!--推荐课程 -->
+	<div class="recommend">
+			<ul>
+				<li>
+					<div class="courses_img"><a href="#"><img src="images/1.jpg"/></a></div>
+					<div class="courses_cont">
+						<h2>Java Android零基础入门</h2>
+						<p>教你如何快速学习安卓课程</p>
+						<p>讲师：keke、 Arry老师等</p>
+						<div class="detailed">
+							<a href="#" class="message">6</a>
+							<a href="#" class="hour">共50节</a>
+							<a href="#" class="number">23</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="courses_img"><a href="#"><img src="images/1.jpg"/></a></div>
+					<div class="courses_cont">
+						<h2>Java Android零基础入门</h2>
+						<p>教你如何快速学习安卓课程</p>
+						<p>讲师：keke、 Arry老师等</p>
+						<div class="detailed">
+							<a href="#" class="message">6</a>
+							<a href="#" class="hour">共50节</a>
+							<a href="#" class="number">23</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="courses_img"><a href="#"><img src="images/1.jpg"/></a></div>
+					<div class="courses_cont">
+						<h2>Java Android零基础入门</h2>
+						<p>教你如何快速学习安卓课程</p>
+						<p>讲师：keke、 Arry老师等</p>
+						<div class="detailed">
+							<a href="#" class="message">6</a>
+							<a href="#" class="hour">共50节</a>
+							<a href="#" class="number">23</a>
+						</div>
+					</div>
+				</li>		
+			</ul>
+		</div>
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script>
+	$(function(){
+		var i=0;
+		$(".jq_menu").click(function(){
+			if(i==0){
+				$(".jq_page").animate({left:"64%"},"slow");
+				$(".jq_page_nav").addClass("opac_1");
+				i++;
+			}else{
+				$(".jq_page").animate({left:"0"},"slow");	
+				$(".jq_page_nav").removeClass("opac_1");
+				i=0;
+			}
+		});
+	});
+  </script>
+ </body>
+</html>

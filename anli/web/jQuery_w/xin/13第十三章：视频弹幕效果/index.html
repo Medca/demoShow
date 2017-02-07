@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title>视频弹幕效果</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				img{border:0}
+				#main{width:1000px;height:530px;margin:30px auto 0px;position:relative;}
+				#main .avi{width:1000px;height:530px;border:2px solid green;position:absolute; top:0px; left:0px;}
+				#main #showTxt{width:1000px; height:300px; position:absolute; left:0px;top:0px;z-index:9999;}
+				#main #showTxt p{position:absolute;left:1000px;top:0;width:100%;font-size:16px;
+				font-weight:600}
+
+				#Ly{width:100%;height:70px; background:rgba(0,0,0,0.5); position:fixed; left:0px; bottom:0px;}
+				#Ly .LyCon{width:710px;height:50px; margin:0px auto; padding-top:20px; position:relative;}
+				#Ly .LyCon input.txt{width:600px; height:33px; line-height:33px; background:#fff;border:0px; border-radius:3px 0px 0px 3px; text-indent:10px; position:absolute; top:20px; left:0px;border:1px solid #ddd; }
+				#Ly .LyCon span.but{display:block;width:100px; height:35px; background:#cc00cc; color:#fff; font-size:14px;font-family:"微软雅黑"; text-align:center; line-height:35px; border-radius:0px 3px 3px 0px;
+				position:absolute;left:600px; top:20px; cursor:pointer;}
+
+		  </style>
+
+	 </head>
+ <body>
+  <div id="main">
+	<!--视频开始  如果你的文字被视频挡住了，在视频里加上 wmode="Transparent"-->
+	<div class="avi">
+		<embed src="http://player.video.qiyi.com/050af2c0ad55f58a40a9d5000b531f14/0/0/v_19rro305ck.swf-albumId=346139000-tvId=346139000-isPurchase=0-cnId=16" allowFullScreen="true" quality="high" width="1000" height="530" wmode="Transparent" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+	</div>
+	<!--视频结束-->
+	
+	<!--文字开始-->
+	<div id="showTxt">
+				
+	</div>
+	<!--文字结束-->
+
+  </div>
+
+<!--发表评论开始-->
+ <div id="Ly">
+	<div class="LyCon">
+		<input type="text" class='txt' />
+		<span class='but'>发表评论</span>
+	</div>
+ </div>
+<!--发表评论结束-->
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	var _top = 0;
+	$("span.but").click(function(){
+		var txt = $("input.txt").val();
+		var t = $("#showTxt").height();
+		var l = $("#showTxt").width();
+		if(txt==''){
+			alert("请输入要发表的内容");
+		}else{
+			$("#showTxt").append("<p>"+txt+"</p>");
+			$("input.txt").val('')
+		}
+		
+		
+	
+		//处理我们添加进去的内容
+		$("#showTxt p").each(function(){
+			if(_top>t-40){_top=5;}
+			_top=_top+40;
+
+			//定义加入的文字位置 
+			$(this).css({left:l,top:_top,color:getRandomColor()});
+
+			//让文字动起来
+			var _w=$(this).width();
+			$(this).animate({left:-_w},getSjTime(),function(){
+				$(this).remove();
+			});
+		});
+	});
+
+
+	//获取随机时间 
+	function getSjTime(){
+		return Math.random()*10000+10000;
+	};
+
+	// 随机获取颜色值
+	function getRandomColor(){
+		return '#' + (function(h) {
+			return new Array(7 - h.length).join("0") + h
+		})((Math.random() * 0x1000000 << 0).toString(16))	
+	};
+</script>
+ </body>
+</html>

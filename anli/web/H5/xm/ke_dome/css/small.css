@@ -1,0 +1,53 @@
+@charset "utf-8";
+/**
+*author:duke
+*600px以下 手机
+**/
+/*公共样式*/
+h1{font-size:1em}
+/*头部*/
+.head{height:50px;line-height:50px;}
+/*页面导航*/
+.page_nav .portrait{height:120px; padding:30px 0;}
+.page_nav .portrait a{height:70px;}
+.page_nav .portrait a .head_portrait img{width:70px;}
+.page_nav .portrait a .mark{font-size:44px;top:-20px;}
+.page_nav .portrait p{font-size:1em;width:70px;}
+/*侧边导航*/
+.page_nav nav li{height:50px;}
+.page_nav nav li a .nav_img{margin:15px 20px;}
+.page_nav nav li a .nav_img img{width:17px;}
+.page_nav nav li a .nav_title{font-size:1em; line-height:50px;}
+/*菜单按钮*/
+.menu{position:absolute;top:15px;left:20px;width:18px;height:18px;background-size:18px 18px;}
+/*分类课程*/
+.classify ul li img{width:40px}
+.classify ul li p{font-size:1em;}
+
+/*推荐课程 列表*/
+.recommend ul li  .courses_cont h2{font-size:1em; margin:8px 0;}
+.recommend ul li  .courses_cont p{ font-size:12px;}
+.recommend ul li  .courses_cont .detailed a{font-size:12px; padding:0 10px 0 20px; height:15px; line-height:20px; margin-right:10px;}
+.recommend ul li  .courses_cont .detailed .message{background-size:15px 15px;}
+.recommend ul li  .courses_cont .detailed .hour{background-size:15px 15px;}
+.recommend ul li  .courses_cont .detailed .number{background-size:15px 15px;}
+/*课程资料*/
+.folder ul li{padding:1em;height:20px;line-height:20px;}
+.folder ul li .folder_img{width:20px; height:20px; padding:0 1em;}
+.folder ul li .folder_cont{font-size:14px;}
+.folder ul li .folder_pointing{font-size:20px;}
+/*视频资料*/
+.tab_head{height:35px;}
+.tab_head li{line-height:30px;}
+/*报名课程*/
+.apply{padding:0.5em 1em;background:#fcfcfc;}
+.apply a{width:55px; height:20px;line-height:20px;}
+/*讲师介绍*/
+.teacher{margin:5px 2px;}
+.teacher .teacher_head p{height:10px;border-left:5px solid #6878a7; padding-left:5px;}
+.teacher ul li{padding:3px;margin-bottom:5px;}
+.teacher ul li .teacher_img{width:50px;}
+.teacher ul li .teacher_img img{width:50px;padding:5px 0px;}
+
+.teacher ul li .teacher_cont p{line-height:15px;}
+.teacher_cont{padding:0.5em;}

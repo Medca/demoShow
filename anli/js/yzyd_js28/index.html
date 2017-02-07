@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>圆周运动</title>
+  <style>
+	#box{width:400px;height:400px;border:1px solid red;margin:100px auto;position:relative;}
+	#box2{width:20px;height:20px;background:red;position:absolute;}
+  </style>
+ </head>
+ <body>
+	<div id="box">
+		<div id="box2"></div>
+	</div>
+
+	<script type="text/javascript">
+		/*
+			动画中的：圆周运动
+			掌握的知识是:Math.sin 和 cos,定位position
+
+			改变元素的宽度和高度----折叠--width/height
+			改变元素的位置----位移---改变top和left,
+			改变元素opacity---淡入淡出
+		*/
+
+
+		/*
+		
+			如果要画一个圆:一个圆心 ,一个半径
+			JSP=-----开发流程你
+			select
+			insert
+			update
+			delelte
+
+			分层编程
+
+
+		*/
+	window.onload = function(){
+		var box = document.getElementById("box");
+		//小盒子
+		var box2 = document.getElementById("box2");
+		//圆心
+		var x = 200;
+		var y = 200;
+		//半径
+		var r = 200;
+		//角度
+		var angle = 0;
+		//速度
+		var speed = 0.065;
+		//角度是数学里概念，在程序是用弧度 (π)====Math.PI
+		var arr = [];
+		//动画函数
+		var timer = setInterval(function(){
+			//轨迹参数
+			var ndiv = document.createElement("div");
+			var top = y + Math.sin(angle) * r;// + 0 1 0 -1
+			var left = x + Math.cos(angle) * r;//- 1 0 -1 0
+			//更改位置
+			box2.style.top = top + "px";
+			box2.style.left = left + "px";
+			angle += speed;
+
+			//痕迹
+			var wh = randomRange(5,2);
+			ndiv.style.width = wh + "px";
+			ndiv.style.height = wh + "px";
+			ndiv.style.background = randomColor16();		
+			ndiv.style.position = "absolute";
+			ndiv.style.left = box2.offsetLeft + "px";
+			ndiv.style.top = box2.offsetTop + "px";
+			box.appendChild(ndiv);
+
+			//清除痕迹
+			arr.push(ndiv);
+			if(arr.length>36){
+				var items = arr.shift();//删掉第一个并返回，pop()删除最后一个
+				box.removeChild(items);
+			}
+		},30);
+
+		function random(num){
+				return Math.floor(Math.random()*(num+1));
+			};
+
+			function randomRange(start,end){
+				return Math.floor(Math.random()*(end-start+1))+start;
+			};
+
+			function randomColor16(){
+				//0-255	
+				var r = random(255).toString(16);
+				var g = random(255).toString(16);
+				var b = random(255).toString(16);
+				//255的数字转换成十六进制
+				if(r.length<2)r = "0"+r;
+				if(g.length<2)g = "0"+g;
+				if(b.length<2)b = "0"+b;
+				return "#"+r+g+b;
+			}
+
+	};
+
+	</script>
+ </body>
+</html>

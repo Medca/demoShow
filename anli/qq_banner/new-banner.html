@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="content-type" content="text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title>腾讯课堂banner图</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				img{border:0;}
+
+				/*banner start*/
+				.banner{width:100%;height:300px;}
+				.banner .b_bg{height:300px;background:#4E4D9B;}
+				.banner .b_bg .b_con{width:1200px;height:300px;margin:0 auto;}
+				.banner .b_bg .b_con .b_focus{width:760px;height:300px;margin:0 auto;overflow:hidden;position:relative;}
+				.banner .b_bg .b_con .b_focus ul li{list-style:none;}
+				
+				/*b_btn start*/
+				.banner .b_bg .b_con .b_focus .b_btn{width:136px;height:24px;position:absolute;bottom:10px;left:330px;}
+				.banner .b_bg .b_con .b_focus .b_btn ul{background:#000;display:inline-block;padding: 7px 28px;border-radius:12px;opacity:0.4;filter:alpha(opacity=40);}
+				.banner .b_bg .b_con .b_focus .b_btn ul li{border:1px solid red;list-style:none;float:left;width:8px;height:8px;border:1px solid #fff;margin:0 3px;
+				border-radius:4px;cursor: pointer;}
+				.no{background:#fff;}
+				/*end b_btn*/
+
+				/*b_ear start*/
+				.banner .b_bg .b_con .b_focus .b_ear{width:46px;height:70px;display:block;position:absolute;top:115px;background:url("images/icon.png") no-repeat;display:none;}
+				.banner .b_bg .b_con .b_focus .pre{left:0;background-position:-73px 0;}
+				.banner .b_bg .b_con .b_focus .pre:hover{background-position:-171px 0;}
+				.banner .b_bg .b_con .b_focus .next{left:713px;background-position:-124px 0;}
+				.banner .b_bg .b_con .b_focus .next:hover{background-position:-1px -57px;}
+				.banner .b_bg .b_con .b_focus:hover .b_ear{display:block;}
+				/*end b_ear*/
+
+				/*end banner*/
+		  </style>
+	 </head>
+<body>
+	<!--banner start-->
+	<div class="banner">
+		<div class="b_bg">
+			<div class="b_con">
+				<!--b_focus start-->
+				<div class="b_focus">
+					<!--b_pic start-->
+					<ul id="b_pic">
+						<li>
+							<a href="#">
+								<img src="images/banner-3.jpg" alt="潭州学院" width="760" height="300"/>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="images/banner-1.jpg" alt="潭州学院" width="760" height="300"/>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="images/banner-2.jpg" alt="潭州学院" width="760" height="300"/>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="images/banner-4.jpg" alt="潭州学院" width="760" height="300"/>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="images/banner-5.jpg" alt="潭州学院" width="760" height="300"/>
+							</a>
+						</li>
+					</ul>
+					<!--end b_pic-->
+					<!--b_btn start-->
+					<div class="b_btn">
+						<ul id="b_btn_mini">
+							<li data-color="#4E4D9B" class="no"></li>
+							<li data-color="#A136D2"></li>
+							<li data-color="#6766CE"></li>
+							<li data-color="#563481"></li>
+							<li data-color="#009DE4"></li>
+						</ul>
+					</div>
+					<!--end b_btn-->
+					<!--b_ear start-->
+					<a href="#" class="b_ear pre"></a>
+					<a href="#" class="b_ear next"></a>
+					<!--end b_ear-->
+				</div>
+				<!--end b_focus-->
+			</div>
+		</div>
+	</div>
+	<!--end banner-->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var index = 0;
+		//轮展图切换 
+		$("#b_btn_mini li").mouseover(function(){
+			// 控制小按钮选中
+			$(this).addClass("no").siblings().removeClass("no");
+			// 联动（图片和小按钮）
+			var _index = $(this).index();
+			index = _index;
+			$("#b_pic li").eq(_index).fadeIn("slow").siblings().hide();
+			// 获取选中背景颜色，切换
+			var background = $(this).data("color");
+			$(this).parents(".b_bg").css("background",background);
+		});
+		//	点击下一页
+		$(".next").click(function(){
+			index++;
+			var length = $("#b_pic li").length;
+			if(index >= length){
+				index = 0;
+			}
+			// 联动背景颜色
+			var background = $("#b_btn_mini li").eq(index).data("color");
+			$(this).parents(".b_bg").css("background",background);
+			//联动图片
+			$("#b_pic li").eq(index).fadeIn("slow").siblings().hide();
+			//联动小按钮
+			$("#b_btn_mini li").eq(index).addClass("no").siblings().removeClass("no");
+		}).mouseover(function(){
+			clearInterval(timer);
+		});
+		//点击上一页
+		$(".pre").click(function(){
+			index--;
+			var length = $("#b_pic li").length;
+			if(index < 0){
+				index = length - 1;
+			}
+			//联动背景颜色
+			var background = $("#b_btn_mini li").eq(index).data("color");
+			$(this).parents(".b_bg").css("background",background);
+			//联动图片
+			$("#b_pic li").eq(index).fadeIn("slow").siblings().hide();
+			//联动小按钮
+			$("#b_btn_mini li").eq(index).addClass("no").siblings().removeClass("no");
+		});
+
+		$(".b_con").hover(function(){
+			clearInterval(timer);
+		},function(){
+			clearInterval(timer);
+			autoPlay();		
+		});
+
+		var timer = null;
+		//调用
+		autoPlay();
+		
+		//自动轮播
+		/*
+		function autoPlay(){		
+			timer=setInterval(function(){
+			index++;
+			var length = $("#b_pic li").lenth;
+			//联动背景色
+			var background = $("#b_btn_mini li").eq(index).data("color");
+			$(".b_bg").css("background",background);
+			//联动图片
+			$("#b_pic li").eq(index).fadeIn("slow").siblings().hide();
+			//联动小按钮
+			$("#b_btn_mini li").eq(index).addClass("no").siblings().removeClass("no");
+		},2000);};
+		*/
+		function autoPlay(){
+				timer = setInterval(function(){$(".next").trigger("click");},1000);
+		};
+
+	});
+
+</script>
+</body>
+</html>

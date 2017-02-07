@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JQuery</title>
+		
+		<link href="css/anli.css" rel="stylesheet"/>
+	<body>
+		<div id="main"></div>
+		 
+		<script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/masonry-docs.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		$(function() {
+		    var $main = $('#main');
+		    var html = "";
+		    var dataInt = {
+		    	'dataSrc':[
+		    		{'src':'./anli/chapter04/new-ht.html'},
+		    		{'src':'./anli/chapter05/index.html'},
+		    		{'src':'./anli/jQuery-k/06/shopcart.html'},
+		    		{'src':'./anli/jQuery-k/tip/tip.html'},
+		    		{'src':'./anli/WEB VIP桌面级插件系统/index.html'},
+		    		{'src':'./anli/chapter07/new-tc -v2.0.html'},
+		    		{'src':'./anli/menu/menu.html'},
+		    		{'src':'./anli/demo/MyTab.html'},
+		    		{'src':'./anli/web/jQuery_w/fei/fangge/1.html'},
+		    		{'src':'./anli/web/jQuery_w/fei/jQCss3/test.html'},
+		    		{'src':'./anli/web/jQuery_w/fei/鼠标滚轮插件/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/02第二章：放大镜效果/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/03第三章：图片瀑布流效果/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/04第四章：倒计时功能/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/05第五章：手机端个性化个人信息表单/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/06第六章：省市区三级联动/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/07第七章：表单验证/yz.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/11第十一章：左键选中文字分享功能/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/12第十二章：左右移动选框内容/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/13第十三章：视频弹幕效果/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/scrollbar_滚动条/index.html'},
+		    		{'src':'./anli/demo/waterfall.html'},
+		    		{'src':'./anli/demo/MyGhost.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/点击3D模式的图片切换效果/index.html'},
+		    		{'src':'./anli/web/jQuery_w/xin/网站全屏展示(鼠标滚轮效果)/index.html'}
+		    	],
+		    	'dataTitle':[
+		    		{"tit":'京东楼层滑梯效果'},
+		    		{"tit":'百度首页卡片'},
+		    		{"tit":'购物车'},
+		    		{"tit":'提示框封装'},
+		    		{"tit":'WEB桌面级应用开发'},
+		    		{"tit":'窗口拖拽'},
+		    		{"tit":'右键菜单'},
+		    		{"tit":'标签切换'},
+		    		{"tit":'方格'},
+		    		{"tit":'3D拖拽（jQ+css3）'},
+		    		{"tit":'鼠标滚轮插件'},
+		    		{"tit":'放大镜效果'},
+		    		{"tit":'图片瀑布流效果'},
+		    		{"tit":'倒计时功能'},
+		    		{"tit":'手机端个性化个人信息'},
+		    		{"tit":'省市区三级联动'},
+		    		{"tit":'表单验证'},
+		    		{"tit":'左键选中文字分享功能'},
+		    		{"tit":'左右移动选框内容'},
+		    		{"tit":'视频弹幕效果'},
+		    		{"tit":'scrollbar_滚动条'},
+		    		{"tit":'jQuery瀑布流'},
+		    		{"tit":'幽灵按钮'},
+		    		{"tit":'点击3D模式的图片切换效果'},
+		    		{"tit":'网站全屏展示(鼠标滚轮效果)'}
+		    	]
+		    };
+		    
+		    $main.imagesLoaded(function() {
+		        $main.masonry({
+	                itemSelector: '.pin',
+	                gutter: 20,
+	                isAnimated: true,
+	            });
+		     });
+		     
+		     
+		     function loadImg(){
+		     	for(var i=0;i<dataInt.dataSrc.length;i++){
+			     	html += "<div class='pin'>"+
+				"		        <div class='box'>"+
+				"		        	<div class='b_b'>"+
+				"		          		<img src='./images/anli/"+i+".jpg'/>"+
+				"		        	</div>"+
+				"		            <a href='"+dataInt.dataSrc[i].src+"'  class='b_title'><span>"+dataInt.dataTitle[i].tit+"</span></a>"+
+				"		        </div>"+
+				"		    </div>";
+			     }
+			     $main.append(html);
+		     }
+			 loadImg();
+		});
+		
+		
+		</script>
+	</body>
+</html>

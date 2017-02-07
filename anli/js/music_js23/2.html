@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title>音乐播放器</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content=""> 
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				body{padding:10px;font-size:14px;font-family:"微软雅黑";}
+				#lrcbox{width:560px;height:120px;overflow:hidden;background:#111;color:#fff;}
+				#lrcbox li{height:24px;transition:all 3s ease;padding:8px;}
+				#lrcbox li.hover{color:red;font-size:24px;padding:8px;}
+		  </style>
+	 </head>
+ <body>
+	<textarea id="lrcnt" style="width:640px;height:240px;display:none;">[ti:如果时光倒流]
+[ar:汪苏泷]
+[al:最佳前男友 电视剧原声带]
+[by:]
+[offset:0]
+[00:00.66]如果时光倒流 - 汪苏泷
+[00:05.14]词：方铂深
+[00:05.95]曲：方铂深
+[00:07.00]
+[00:16.31]走了很远才回过头
+[00:21.62]
+[00:23.30]身处冰冷的寒流
+[00:27.27]
+[00:29.95]再没有你牵我的手
+[00:36.57]
+[00:37.27]不顾一切对我挽留
+[00:42.85]
+[00:46.50]我一个人要怎么走
+[00:51.33]
+[00:53.32]在没有你的路口
+[00:57.15]
+[00:59.65]孤单时候谁在身后
+[01:06.65]
+[01:07.27]幸福向左还是向右
+[01:12.79]
+[01:13.93]如果时光可以倒流
+[01:17.78]
+[01:18.32]你是否为我放弃所有
+[01:21.69]
+[01:22.26]然后幸福快乐
+[01:24.58]一起颤抖交换温柔
+[01:29.24]我可以忘记了所有
+[01:32.56]
+[01:33.33]但只要记住你的双眸
+[01:37.24]记得你的右手
+[01:39.77]那种温热是因为我直到永久
+[01:46.48]
+[02:01.40]我一个人要怎么走
+[02:06.37]
+[02:08.27]在没有你的路口
+[02:12.64]
+[02:14.77]孤单时候谁在身后
+[02:21.62]
+[02:22.32]幸福向左还是向右
+[02:28.25]
+[02:28.95]如果时光可以倒流
+[02:32.55]
+[02:33.37]你是否为我放弃所有
+[02:36.63]
+[02:37.25]然后幸福快乐
+[02:39.66]一起颤抖交换温柔
+[02:43.97]我可以忘记了所有
+[02:47.50]
+[02:48.33]但只要记住你的双眸
+[02:52.12]记得你的右手
+[02:54.53]那种温热是因为我直到永久
+[03:01.53]
+[03:02.90]如果时光可以倒流
+[03:07.01]你是否为我放弃所有
+[03:10.95]然后幸福快乐
+[03:13.33]一起颤抖交换温柔
+[03:17.70]我可以忘记了所有
+[03:21.90]但只要记住你的双眸
+[03:25.94]记得你的右手
+[03:28.31]那种温热是因为我直到永久
+[03:35.03]
+[03:36.98]是因为我直到永久
+	</textarea>
+	<div><audio src="01.mp3" controls id="audio"/></div>
+	<!--存放歌词-->
+	<div id="lrcbox">
+		<ul id="lrc_list">
+		</ul>
+	</div>
+<!---
+第一次分隔: arr = split("]")
+[03:10.31,走了很远才回过头
+arr[0] = [03:10.31
+arr[1] = 走了很远才回过头;
+第二步：将时间转换数字
+[条换掉,进行:分隔得到如下
+var ms = 03*60 + 10.31;
+var m = parseInt(ms);
+-->
+<script	type="text/javascript">
+	/*
+			1：解析歌词
+			2: 歌词的运动
+			3:结合音乐播放器进行歌词的驱动
+	*/
+	function $(id){
+		return document.getElementById(id);	
+	};
+
+	window.onload = function(){
+		//歌词初始化
+		lrc.init($("lrcnt").value);
+		//获取audio对象
+		var audioDom = $("audio");
+		audioDom.ontimeupdate = function(){
+			var t = parseInt(this.currentTime);
+			lrc.jump(t);
+		};
+	};
+
+	var lrc = {
+		cindex:0,
+		list:[],
+		regex_time: /\[(\d+)\:((?:\d+)(?:\.\d+)?)\]/g, /* 提取歌词时间轴 */
+		regex_trim: /^\s+|\s+$/,/*去掉左右空格*/
+		init:function(lrctxt){
+			var txts = lrctxt.split("\n");
+			var html = "";
+			for(var i=0;i<txts.length;i++){
+				//去掉左右空格
+				var item = txts[i].replace(this.regex_trim,'');
+				//歌词和时间分隔
+				var ms = item.split("]");
+				var mt = ms[0].replace("[","").split(":");
+				var m = parseInt(mt[0]*60 + mt[1]*1);
+				var txt = ms[1];
+				if(txt!=""){
+					this.list.push(m);
+					html += "<li id='t_"+m+"'>"+txt+"</li>";
+				}
+			}
+			$("lrc_list").innerHTML = html;
+		},
+
+		jump:function(duration){
+			var dom = $("t_"+duration);
+			//歌词盒子
+			var lirbox = $("lrc_list");
+			//因为播放过程，可能没有找到适合的歌词就是null对象
+			if(dom!=null){
+				//拿到同辈对象
+				var arr = this.siblings(dom);
+				//将同辈对象的样式去掉
+				for(var i=0;i<arr.length;i++){
+					arr[i].className = "";
+				}
+				//播放当前本身加上hover
+				dom.className = "hover";
+				//dom.style.color = this.randomColor();
+				var text = dom.innerText || dom.textContent;
+				var html = "";
+				for(var i=0;i<text.length;i++){
+					html+="<span style='color:"+this.randomColor()+"'>"+text.charAt(i)+"</span>";
+				}
+				dom.innerHTML = html;
+				//拿到当前播放的索引位置，减去1的目的是为了让高亮歌词放在中间
+				var index = this.indexof(dom)-1;
+				//改变歌词盒子的marginTop，当然也可以使用banner的定位方式，改变top
+				lirbox.style.marginTop = (index<0?0:index)* -40 + "px";
+			}
+		},
+
+		//查找当前播放的歌词是否没有发生变化
+		indexof:function(dom){
+			var listDoms = dom.parentElement.children;
+			var index = -1;
+			for(var i=0;i<listDoms.length;i++){
+				if(listDoms[i]==dom){
+					index = i;
+					break;
+				}
+			}
+			return index;
+		},
+
+		randomColor :function(){
+				var r = Math.floor(Math.random()*256);
+				var g = Math.floor(Math.random()*256);
+				var b = Math.floor(Math.random()*256);
+				return "rgb("+r+","+g+","+b+")";
+			},
+
+	//获取同辈元素
+	siblings:function(dom){//不包括元素本身
+		var listDoms = dom.parentElement.children;
+		var arr = [];
+		for(var i=0;i<listDoms.length;i++){
+			if(listDoms[i]==dom){
+				arr.push(listDoms[i]);
+			}
+		}
+		return arr;
+	}
+};
+</script>
+ </body>
+</html>

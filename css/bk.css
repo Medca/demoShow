@@ -1,0 +1,301 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+img {
+	border: 0
+}
+
+body {
+	font-size: 12px;
+	font-family: "微软雅黑";
+	color: #333;
+	background: #F0F0F0;
+}
+
+
+/*content Start*/
+
+
+
+/*c_left Start*/
+
+.content .c_left {
+	width: 688px;
+	height: 100%;
+	float: left;
+}
+
+.content .c_left .l_tb {
+	height: 504px;
+	border: 1px solid #CACACA;
+}
+
+.content .c_left .l_tb .t_title {
+	height: 77px;
+	padding: 3px 20px;
+}
+
+.content .c_left .l_tb .t_title .t_h2 {
+	height: 43px;
+	line-height: 30px;
+	color: #333;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.content .c_left .l_tb .t_title .t_tp {
+	color: #555;
+}
+
+.content .c_left .l_tb .t_pic {
+	height: 401px;
+	background: url("../images/index/t_pic.jpg") no-repeat top center;
+}
+
+.content .c_left .l_tb .t_other {
+	height: 26px;
+	padding: 0px;
+	font-size: 14px;
+}
+
+.content .c_left .l_tb .t_other .o_left {
+	margin-right: 20px;
+	padding: 20px 0;
+}
+
+.content .c_left .l_tb .t_other .o_left a {
+	text-decoration: none;
+	text-align: none;
+	color: #333;
+	font-size: 14px;
+}
+
+.content .c_left .l_tb .t_other a:hover {
+	color: #348CDF;
+}
+
+.content .c_left .l_tb .t_other ul {
+	float: right;
+}
+
+.content .c_left .l_tb .t_other ul li {
+	float: left;
+	list-style: none;
+}
+
+.content .c_left .l_tb .t_other ul li a {
+	width: 40px;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: #333;
+}
+
+.content .c_left .l_tb .t_other ul li a:hover {
+	color: #348CDF;
+}
+
+.content .c_left .l_mob {
+	margin-top: 18px;
+	border: 1px solid #CACACA;
+}
+
+.content .c_left .l_mob .contentList li {
+	border-bottom: 1px dotted #333;
+	list-style: none;
+}
+
+.content .c_left .l_mob .contentList li h2 {
+	font-size: 25px;
+	font-weight: 700;
+	margin-top: 20px
+}
+
+.content .c_left .l_mob .contentList li h2 a {
+	color: #333
+}
+
+.content .c_left .l_mob .contentList li h2 a:hover {
+	color: #828282
+}
+
+.content .c_left .l_mob .contentList li .subtitle {
+	margin-top: 10px;
+}
+
+.content .c_left .l_mob .contentList li .timer {
+	margin: 10px 0px;
+}
+
+
+/*End c_left*/
+
+
+/*c_right Start*/
+
+.content .c_right {
+	width: 270px;
+	float: left;
+}
+
+.content .c_right .r_share {
+	width: 150px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+.content .c_right .r_share a {
+	width: 38px;
+	height: 38px;
+	display: block;
+	float: left;
+	margin: 30px 5px 0 5px;
+	border-radius: 4px;
+	position: relative;
+	overflow: hidden;
+}
+
+.content .c_right .r_share a span {
+	width: 35px;
+	height: 79px;
+	display: block;
+	background: url("../images/index/share.png") no-repeat;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.content .c_right .r_share a .wb {
+	background-position: 3px 6px;
+}
+
+.content .c_right .r_share a .tx {
+	background-position: -41px 6px;
+}
+
+.content .c_right .r_share a .qq {
+	background-position: -81px 6px;
+}
+
+.content .c_right .r_pic {
+	width: 270px;
+	height: 220px;
+	background: url("../images/index/r.jpg") no-repeat;
+}
+
+.content .c_right .r_silder h2 {
+	font-size: 18px;
+	font-weight: bold;
+	border-bottom: 5px #d3d3d3 solid;
+	padding-bottom: 6px;
+}
+
+.content .c_right .r_silder h2 i {
+	font-size: 16px;
+}
+
+.content .c_right .r_silder h2 i:hover {
+	color: green
+}
+
+.content .c_right .r_silder .gonggao p {
+	text-indent: 2em;
+	padding: 10px;
+}
+
+.content .c_right .r_silder .weibo p {
+	padding: 10px;
+}
+
+.content .c_right .r_silder .weibo .add {
+	height: 50px;
+	display: inline-block;
+	width: 187px;
+	padding-left: 20px;
+}
+
+.content .c_right .weibo .add a {
+	display: inline-block;
+	background: #CF454D;
+	padding: 3px 12px;
+	color: #fff;
+	border-radius: 3px;
+}
+
+.content .c_right .r_leibiao {
+	height: 270px;
+	margin-top: 100px;
+	border: 1px solid #ccc;
+}
+
+.content .c_right .r_leibiao .r_lt {
+	font-size: 18px;
+	color: #f00;
+}
+
+.content .c_right .r_leibiao li {
+	padding: 5px 2px;
+	font-size: 12px;
+}
+
+.content .c_right .r_leibiao li a:hover {
+	color: red;
+}
+
+
+/*End c_right*/
+
+
+/*End content*/
+
+
+/*base Start*/
+
+.base {
+	height: 100px;
+	margin-top: 120px;
+	border-top: 1px solid #ccc;
+	padding-top: 20px;
+}
+
+.base p {
+	text-align: center;
+	line-height: 30px;
+}
+
+.base p a {
+	text-decoration: none;
+	color: #333;
+}
+
+.base p a:hover {
+	color: #CACACA;
+}
+
+
+/*End base*/
+
+#top {
+	width: 60px;
+	height: 50px;
+	position: fixed;
+	right: 15px;
+	bottom: 100px;
+	display: none;
+}
+
+#top span {
+	width: 60px;
+	height: 50px;
+	display: block;
+	background: url("../images/index/icon_top.png") no-repeat center #000;
+	border-radius: 5px;
+	cursor: pointer;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+::selection {
+	background: #6ff;
+}

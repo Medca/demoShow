@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title>网站全屏展示(鼠标滚轮效果)</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				body{overflow:hidden;}
+				ul#but{width:30px;height:100px;position:fixed;right:10px; top:270px;}
+				ul#but li{list-style-type:none;width:10px;height:10px; border:1px solid #000; margin:5px 0px;border-radius:5px; background:#fff;}
+				ul#but li.hover{background:green;}
+				
+		  </style>
+
+	 </head>
+ <body>
+    <div class="box" style="background:#666699;"></div>
+	<div class="box" style="background:#FF9933;"></div>	
+	<div class="box" style="background:#009933;"></div>	
+	<div class="box" style="background:#669900"></div>	
+	<div class="box" style="background:#CCFF00"></div>	
+	<div class="box" style="background:#33ffff"></div>
+
+	<!--按扭开始-->
+	<ul id="but">
+		<li class="hover"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<!--按扭结束-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+<script type="text/javascript">
+	var index=0;
+	var h=$(window).height();//获取到浏览器的高度
+	var len = $("#but li").length;
+	$(".box").height($(window).height());  //div加高度
+	$("#but li").click(function(){
+		var index = $(this).index();
+		$(this).addClass("hover").siblings().removeClass("hover");
+		$("body,html").animate({"scrollTop":index*h},1000);
+	});
+
+	var lastTime=new Date();//获取当前的时间
+	//鼠标滚轮事件的执行
+	//event 当前事件(滚轮事件)  delta 当值1时：向上滚动  -1时:向下滚动  deltaX, deltaY分别是滚轮滚动的坐标值
+
+	$(document).mousewheel(function(event,delta,deltaX,deltaY){
+		if(new Date()-lastTime>1000){//滚轮当前的时间减去页面当前的时间
+			lastTime=new Date();
+			//向下滚动
+			if(delta==-1){
+				index++;
+				if(index<=len-1){
+					$("#but li").eq(index).addClass("hover").siblings().removeClass("hover");
+					$("body,html").animate({"scrollTop":index*h},1000);
+				}else{index=len-1}
+			}
+			
+			//向上滚动
+			if(delta==1){
+				index--;
+				if(index>=0){
+					$("#but li").eq(index).addClass("hover").siblings().removeClass("hover");
+					$("body,html").animate({"scrollTop":index*h},1000);
+				}else{index=0}
+			}
+		}
+	});
+</script>
+ </body>
+</html>

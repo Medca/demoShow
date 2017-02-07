@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>画布</title>
+  <style>
+	*{padding:0;margin:0}
+	a{text-decoration:none;color:#fff}
+	ul,li{list-style:none}
+	body{background:#333;font-size:12px;font-family:"微软雅黑"}
+  </style>
+ </head>
+ <body>
+	
+
+	<canvas id="canvas" width="160" height="600" style="background:#111"></canvas>
+
+	<script>
+	var canvasDom = document.getElementById("canvas");
+	var context = canvasDom.getContext("2d");
+	var fsize = 16;
+	var index = 0;
+	var yindex = 0;
+	context.fillStyle="red";
+	context.font="normal 16px 微软雅黑";
+	var str = "有道无术，术可求。有术无道，止于术。"
+	setInterval(function () {
+                var x = fsize * (index%10);
+                var y = fsize * (index%10==0?++yindex:yindex);
+                context.fillText(str[index%str.length],x,y);
+                context.fill();
+                context.closePath();
+                index++;
+        },200)
+
+  </script>
+ </body>
+</html>

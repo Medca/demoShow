@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="content-type" content="text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title>视频弹出窗</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				body{background:url("images/bg.jpg") top repeat;font-size:12px;font-family:"微软雅黑");
+				color:#fff;}
+				.btn{width:140px;height:30px;display:block;border:1px solid #63f;margin:100px auto;text-align:center;line-height:32px;text-decoration:none;
+				font-size:16px;color:#63f;border-radius:16px;}
+				.btn:hover{background:#63f;color:#fff;}
+				.show{width:700px;height:350px;border:6px solid #fff;box-shadow:0px 0px 30px 2px;border-radius:10px;position:absolute;top:0;left:0;z-index:2;display:none;}
+				.yy{width:100%;height:100px;position:absolute;top:0;left:0;
+				filter:alpha(opactiy=50);opactiy:0.5;z-index:1;display:none;}		
+		  </style>
+<link type="text/css" rel="stylesheet" href="css/animate.css"></link>
+	 </head>
+ <body>
+	<a href="#" class="btn">弹出窗</a>
+	<div class="show">
+		<embed src="http://player.youku.com/player.php/sid/XODgxNTA0NjE2/v.swf" allowFullScreen="true" quality="high" width="700" height="350" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+	</div>
+	
+	<div class="yy"></div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// 获取距离浏览器左侧的距离
+		var _left=($(window).width()-700) / 2;
+		// 获取距离浏览器顶部的距离
+		var _top=($(window).height()-350) / 2;		
+		
+		// 点击按钮弹出层
+		$(".btn").click(function(){
+			$(".show").show().addClass("animated rollIn").css({left:_left,top:_top});
+		});
+
+		// 点击阴影层
+		$(".yy").click(function(){
+			$(this).hide();
+			$(".show").show().animate({
+				width:"-750px",
+				height:"-350px",
+				left:"-"+_left+"px",
+				top:"-"+_top+"px"
+			},500,function(){
+				$(this).css({width:700,height:350}).hide();
+			});
+		});
+
+	});
+</script>
+ </body>
+</html>

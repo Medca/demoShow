@@ -1,0 +1,44 @@
+*{padding: 0;margin:0;}
+body{
+	background: #EEE;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+#main{
+    position: relative;
+}
+.pin{
+    padding: 15px 0 0 15px;
+    float:left;
+}
+.box{
+    padding: 10px;
+    border:1px solid #ccc;
+    box-shadow: 0 0 6px #ccc;
+    border-radius: 5px;
+}
+.box .b_b{
+	overflow: hidden;
+}
+.box img{
+    height:auto;
+    width:162px;	
+	transition: all .3s ease;
+}
+.box img:hover{
+	transform: scale(1.4);
+	transition: all .3s ease;
+}
+.box .b_title{
+	display: block;
+	width: 162px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.box .b_title:hover{
+	color: #33A646;
+	text-decoration: underline;
+}

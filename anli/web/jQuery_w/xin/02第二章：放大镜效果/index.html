@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+	 <head>  
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <title>放大镜</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				img{border:0}
+				.box{width:400px;height:400px;border:5px solid #ddd;margin:100px auto;position:relative;}
+				/*simg Start*/
+				.box .simg{width:400px;height:400px;position:relative;}
+				.box .simg .smove{width:80px; height:100px;display:block; background:#fff;position:absolute; left:0px; top:0px;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;
+				border:#000 solid 1px;display:none;}
+				.box .simg .shade{width:400px;height:400px;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;background:#fff;position:absolute; left:0px; top:0px;display:block;}
+				/*end simg*/
+
+				/*bimg Start*/
+				.box .bimg{width:300px;height:300px;position:absolute; left:430px;top:50px;overflow:hidden;display:none;}
+				.box .bimg img{position:absolute;} 
+				/*end bimg*/
+		  </style>
+	 </head>
+ <body>
+	<div class="box" id="box">
+		<!--simg Start-->
+		<div class="simg">
+			<img src="images/simg.jpg">
+			<span class="smove"></span>
+			<span class="shade"></span>
+		</div>
+		<!--end simg-->
+
+		<!--bimg start-->
+		<div class="bimg">
+			<img src="images/bimg.jpg">
+		</div>
+		<!--end bimg-->
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		//鼠标移动显示
+		$(".simg .shade").mousemove(function(){
+			$(".smove").show();//滑块显示
+			$(".bimg").show();//大图显示
+		});
+		
+		//鼠标离开隐藏
+		$(".simg .shade").mouseout(function(){
+			$(".smove").hide();//滑块隐藏
+			$(".bimg").hide();//大图隐藏
+		});
+
+		$(".simg .shade").mousemove(function(e){
+			var x = e.clientX;//鼠标x轴的距离
+			var y = e.clientY;//鼠标y轴的距离
+			var l = $("#box").offset().left;//获区box 与浏览器窗口左边距离
+			var t = $("#box").offset().top;//获区box 与浏览器窗口上边距离
+			var shade_t = $(".shade").height();//获取shade的高度
+			var shade_l = $(".shade").width();//获取shade的宽度
+			var w = $(".smove").width();//阴影模块的宽度的一半
+			var h = $(".smove").height();//阴影模块的高度的一半
+			var _left = x-l-(w/2);//透明小滑块左边的距离 
+			var _top = y-t-(h/2);//透明小滑块上面的距离
+			
+			var bw = shade_l - w; //透明滑块能滑动最大的宽度
+			var bt = shade_t - h;//透明滑块能滑动最大的高度
+
+			var bimg_w = _left / bw; //滑动宽度的比例
+			var bimg_h = _top / bt;//滑动高度的比例
+
+
+			 //大图对应的左边的距离
+			var big_w = ($(".bimg img").width()-$(".bimg").width())*bimg_w;
+			//大图对应的高度的距离
+			var big_h = ($(".bimg img").height()-$(".bimg").height())*bimg_h;
+			//控制上下限制
+			if(_top<0){
+				_top = 0;
+			}else if(_top>bt-2){
+				_top = bt-2;
+			}
+
+			//控制左右限制
+			if(_left<0){
+				_left = 0;
+			}else if(_left>bw-2){
+				_left = bw-2;
+			}
+			$(".smove").css({top:_top,left:_left});
+			 
+
+			$(".bimg img").css({top:-big_h,left:-big_w})
+		});
+	</script>
+ </body>
+</html>

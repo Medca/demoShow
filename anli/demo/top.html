@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			.box{
+				width: 1000px;
+				margin: 0 auto;
+			}
+			.btn{
+				width: 40px;
+				height: 80px;
+				position: fixed;
+				bottom:30px;
+				right: 7%;
+				background: red;
+				display: none;
+			}
+			.btn:hover{
+				background: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<img src="img/jkxy.png"/>
+		</div>
+		<a href="javasript:void(0);" class="btn" title="回到顶端" id="btn"></a>
+		
+		<script type="text/javascript">
+			window.onload = function () {
+			    var topbtn = document.getElementById("btn");
+			    var timer = null;
+			    //获取屏幕高度
+			    var pagelookheight = document.documentElement.clientHeight;
+			
+			    window.onscroll = function(){
+					//alert("hello");
+			        var backtop = document.body.scrollTop;
+			        if(backtop >= pagelookheight){
+			            topbtn.style.display = "block";
+			        }else{
+			            topbtn.style.display = "none";
+			        }
+			    }
+			
+			    topbtn.onclick = function () {
+					//alert("Hello")
+			        timer = setInterval(function () {
+			            var backtop = document.body.scrollTop;
+			            var speedtop = backtop/5;
+			            document.body.scrollTop = backtop - speedtop;
+			            if(backtop == 0){
+			                clearInterval(timer);
+			            }
+			        }, 30);
+			    }
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title>左右点击选择框移动内容</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px; padding:0px;font-family:"微软雅黑";list-style:none;}
+				.gray{position:absolute; width:100%;height:100%; background:rgba(0,0,0,0.5); top:0px; left:0px;display:none;}
+				#selectCon{width:600px;height:500px; background:#fff; border:1px solid #ddd; position:absolute; left:450px;top:100px;display:none;}
+				#selectCon h3{height:30px; line-height:30px; color:#fff; font-size:16px;text-indent:10px;background:#cc3; font-weight:100;}
+				#selectCon h3 span.close{float:right;padding-right:10px;cursor:pointer;}
+			    #sel_Con{width:560px; height:430px; margin:20px auto 0px;}
+
+				#sel_Con .sel_begin{width:210px; height:425px; float:left;}
+				#sel_Con ul{width:210px;height:380px;border:1px #ddd solid;overflow-y:auto;background:#ebebeb;}
+				#sel_Con .sel_but{width:110px; height:425px; margin:0px 10px 0px 15px; padding-top:100px;float:left;}
+				#sel_Con .sel_end{width:210px;height:380px;float:left;}
+
+				#sel_Con p{line-height:35px;color:#666; font-size:14px; text-indent:10px;}
+				#sel_Con ul li{line-height:30px; font-size:14px; text-indent:10px;}
+
+				.sel_but span{border:1px solid #ddd; background:#ebebeb; color:#666; text-align:center;line-height:40px;display:block; border-radius:2px; margin:15px 0px;width:100px;font-size:14px;cursor:pointer;}
+
+				.click_but{display:block; width:100px;line-height:40px; color:#fff; text-align:center;border-radius:5px;background:#cc33cc; margin:10px auto; cursor:pointer;}
+
+				ul li.bg_gray{background:#616161;color:#fff;}
+				ul li.bg_blue{background:#cccc00;color:#fff;}
+				
+		  </style>
+
+	 </head>
+ <body>
+  <span class="click_but">点击弹窗</span>
+<div class="gray"></div>
+
+ <div id="selectCon">
+	<h3>选择群 <span class="close">X</span></h3>
+	<div id="sel_Con">
+		<!--左选择框开始-->
+		<div class="sel_begin">
+			<p>请分配管理权限</p>
+			<ul class="sel_beg">
+				<li>超级管理员</li>
+				<li>普通管理员</li>
+				<li>信息发布员</li>
+				<li>财务管理员</li>
+				<li>产品管理员</li>
+				<li>资源管理员</li>
+				<li>系统管理员</li>
+				<li>超级管理员</li>
+				<li>普通管理员</li>
+				<li>信息发布员</li>
+				<li>财务管理员</li>
+				<li>产品管理员</li>
+				<li>资源管理员</li>
+			</ul>
+		</div>
+		<!--左选择框结束-->
+
+		<!--中间按扭开始-->
+		<div class="sel_but">
+			<span class="add">添加</span>
+			<span class="add_all">全部添加</span>
+			<span class="remove">移除</span>
+			<span class="remove_all">全部移除</span>
+		</div>
+		<!--中间按扭结束-->
+
+		<!--右选择框开始-->
+		<div class="sel_end">
+			<p>已分配的管理权限</p>
+			<ul class="selul_end">
+				
+			</ul>
+		</div>
+		<!--右选择框结束-->
+
+	</div>
+ </div>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+<script type="text/javascript">
+	var _index=0;
+	var _shiftIndex=-1;
+
+	//点击弹窗按扭
+	$(".click_but").click(function(){
+		$(".gray").show();
+		$("#selectCon").show();
+	});
+
+	//点击关闭按扭
+	$(".close").click(function(){
+		$(".gray").hide();
+		$("#selectCon").hide();
+	});
+
+	//鼠标滑动到 li上时
+	$(".sel_beg li").hover(function(){
+		$(this).addClass("bg_gray");
+	},function(){
+		$(this).removeClass("bg_gray");
+	});
+
+	//鼠标点击li时
+	$(".sel_beg li").click(function(){
+		$(this).toggleClass("bg_blue");
+
+		
+		//向下全选时
+		if($(this).index()>_shiftIndex && _shiftIndex>-1){
+			for(var  i=_shiftIndex;i<$(this).index();i++){
+				$("ul.sel_beg li").eq(i).addClass("bg_blue");
+			}
+		}
+
+
+		//向上全选时
+		if($(this).index()<_shiftIndex && _shiftIndex>-1){
+			for(var j=$(this).index();j<_shiftIndex;j++){
+				$("ul.sel_beg li").eq(j).addClass("bg_blue");
+			}
+		}
+
+
+
+		if($(this).hasClass("bg_blue")){
+			_index=$(this).index();
+		}
+
+	});
+
+	//点击添中按扭
+	$(".add").click(function(){
+		if($("ul.sel_beg li.bg_blue").length==0){
+			alert("请选择所需要的项目！！");
+		}else{
+			$(".selul_end").append($(".bg_blue").removeClass("bg_blue").hide().fadeIn(500));
+		}
+	});
+
+	//全部添加
+	$(".add_all").click(function(){
+		$(".selul_end").append($(".sel_beg li").removeClass("bg_blue").hide().fadeIn(500));
+	});
+
+	//点击移除按扭
+	$(".remove").click(function(){
+		if($("ul.selul_end li.bg_blue").length==0){
+			alert("请选择所需要的项目！！");
+		}else{
+			$(".sel_beg").append($(".bg_blue").removeClass("bg_blue").hide().fadeIn(500));
+		}
+	});
+
+	//全部移除
+	$(".remove_all").click(function(){
+		$(".sel_beg").append($(".selul_end li").removeClass("bg_blue").hide().fadeIn(500));
+	});
+
+	//按shift键
+	$(document).keydown(function(e){
+		if(e.shiftKey){
+			_shiftIndex=_index;
+		}
+	});
+
+	//当键盘松开时
+	$(document).keyup(function(e){
+			_shiftIndex=-1;
+	});
+</script>
+ </body>
+</html>

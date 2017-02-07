@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+	 <head> 
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <title>方格动画</title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				img{border:0}
+				#wrap{width:570px;height:420px;border:1px solid #0f0;margin:50px auto;}
+				#wrap ul li{list-style:none;border:1px solid rgba(0,0,0,0);width:55px;height:58px;float:left;background-repeat:no-repeat;;}
+				input{width:150px;padding:3px 0;border-radius:5px;margin:10px auto;display:block;background:#fc0;font-size:24px;color:#333;}
+				input:hover{background:#ff0}
+
+		  </style>
+
+	 </head>
+ <body>
+		<div id="wrap">
+			<ul>
+			</ul>
+		</div>
+		<input id="xs" type='button' value="消失" />
+		<input id="hy" type='button' value="还原" />
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+	for(var i=0;i<70;i++){
+		$("#wrap ul").append("<li></li>");
+	}
+	$(function(){
+		//outerWidth outerHeight 包括边框线
+		var iX = $('#wrap').width()/$('#wrap ul li').outerWidth();//水平多少个 10
+		var iY = $('#wrap').height()/$('#wrap ul li').outerHeight();//垂直多少个 7
+		var iL = $('#wrap ul li').size();//li个数 70
+		
+		function cha(){
+			var sum = 0;
+			var p = setInterval(function(){
+				if(sum<=15){
+					for(var i=0;i<=sum;i++){//垂直方向遍历
+						var y = 6-i;
+						if(y<0){break;};
+						for(var j=0;j<=sum;j++){//水平方向遍历
+							var x = 9 - j;
+							if(x<0){break;}
+							if(i+j==sum){
+								$('#wrap ul li').EQ(x,y,iX).css({
+									'transition':'2s transform,2s opacity',
+									'transform':'translate(-50px,-70px) rotateX(720deg)',
+									'border':'1px solid rgba(0,0,0,1)',
+									'opacity':'0'
+								});
+							}
+						}
+					}
+					sum++;
+				}else{
+					clearInterval(p);
+				}
+			},70);
+		};
+
+		function cha1(){
+			var sum = 0;
+			var p = setInterval(function(){
+				if(sum<=15){
+					for(var i=0;i<=sum;i++){
+						if(y<0){break;};
+						for(var j=0;j<=sum;j++){
+							if(x<0){break;}
+							if(i+j==sum){
+								$('#wrap ul li').EQ(i,j,iX).css({
+									'transition':'2s transform,2s opacity,2s border',
+									'transform':'translate(0px,0px) rotateX(0deg)',
+									'border':'1px solid rgba(0,0,0,0)',
+									'opacity':'1'
+								});
+							}
+						}
+					}
+					sum++;
+				}else{
+					clearInterval(p);
+				}
+			},70);
+		};
+
+		$("#xs").click(function(){cha();});
+		$("#hy").click(function(){cha1();});
+		for (var i=0;i<iL;i++)
+		{
+			var x = i%iX;//i%10 求坐标
+			var y = parseInt(i/iX);
+			//$("#wrap ul li").eq(i).append( x +','+ y )
+			$('#wrap ul li').eq(i).css({
+				'backgroundImage':'url(img/1.jpg)',
+				'backgroundPosition':-x*57+'px '+y*-60+'px'
+			});
+		};
+	});
+
+	$.fn.extend({//拓展方法，加上索引
+		EQ : function(x,y,iX){
+			return this.eq(x+y*iX);
+		}
+	});
+
+</script>
+ </body>
+</html>

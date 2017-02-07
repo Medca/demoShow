@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title></title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+<!--css,js-->
+<style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#3333}
+	.box{position:absolute;top:0;left:0;width:200px;height:200px;background:red;font-size:12px;color:#fff;text-align:center;}
+	.box h1{background:#111;font-size:14px;height:45px;line-height:45px;text-align:left;padding-left:5px;cursor:move;}
+	#wrap{width:960px;height:560px;background:green;margin:100px auto;}
+  </style>
+ </head>
+ <body>
+	
+	
+	
+
+	<div id="wrap">
+		<div id="box" class="box">
+			<h1>我是标题1</h1>
+			1随意拖拽
+		</div>
+		<div id="box4" class="box" style="background:gray">5执行回调函数改变yellow</div>	
+	</div>
+
+	<div id="box1" class="box" style="background:green">2横向拖</div>
+	
+	<div id="box2" class="box" style="background:pink">3纵向拖</div>
+	<div id="box3" class="box" style="background:#111">4镜像拖</div>
+
+
+	<script type="text/javascript" src="dom.js"></script>
+	<script>
+
+  	window.onload = function(){
+		var drag = new Drag();
+		drag.init({id:"box",handler:1,parent:"wrap"});
+		
+
+		var drag1 = new Drag();
+		drag1.init({id:"box1"});
+
+
+		var drag2 = new Drag();
+		drag2.init({id:"box2",arrow:"left"});
+
+
+		var drag3 = new Drag();
+		drag3.init({id:"box3","arrow":"top"});
+
+
+		var drag4 = new Drag();
+		drag4.init({id:"box4",parent:"wrap",callback:function(){
+			this.style.background = "yellow";	
+		}});
+		
+	};
+
+
+
+	//拖拽的构造函数
+	function Drag(){
+	}
+
+	Drag.prototype.init = function(options){
+		//参数的混入 jquery $.extend
+		var opts = mix({},{arrow:"",handler:"",parent:"",position:"relative"},options);
+
+		var boxDom = dom(opts.id);
+		//父元素
+		var parentDom = dom(opts.id);
+		if(opts.handler){
+			boxDom = boxDom.children[opts.handler*1-1];
+		}
+		//获取父盒子对象	
+		var pboxDom = dom(opts.parent);
+		if(pboxDom)pboxDom.style.position = opts.position;
+
+		var mark  = false;
+		boxDom.onmousedown = function(e){
+			var sleft = parentDom.offsetLeft;
+			var stop = parentDom.offsetTop;
+			var maxLeft = (pboxDom?pboxDom.offsetWidth:window.innerWidth) - parentDom.offsetWidth;
+			var maxTop = (pboxDom?pboxDom.offsetHeight:window.innerHeight) -parentDom.offsetHeight;
+			var pos = getXY(e);
+			mark = true;
+			document.onmousemove = function(e){
+				if(mark){
+					var pos2 = getXY(e);
+					var nleft = pos2.x - pos.x+sleft;
+					var ntop = pos2.y - pos.y+stop;
+
+					if(nleft<0)nleft=0;
+					if(ntop<0)ntop=0;
+					if(nleft>maxLeft)nleft=maxLeft;
+					if(ntop>maxTop)ntop=maxTop;
+					
+					//改变位置
+					if(opts.arrow=="left"){
+						parentDom.style.left = nleft+"px";
+					}else if(opts.arrow=="top"){
+						parentDom.style.top = ntop+"px";
+					}else{
+						parentDom.style.left = nleft+"px";
+						parentDom.style.top = ntop+"px";
+					}
+
+				}
+			};
+			document.onmouseup = function(){
+				this.onmousemove = null;
+				this.onmouseup = null;
+				mark = false;
+				if(opts.callback)opts.callback.call(parentDom);
+			};
+		};
+	};
+
+  </script>
+ </body>
+</html>

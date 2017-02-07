@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title></title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{margin:0px;padding:0px;}
+				body{background:#111;}
+		  </style>
+	 </head>
+ <body>
+	<div id="target" style="margin:50px auto;width:300px;">
+		<canvas id="canvas" width="300" height="300" style="background:#fff">
+			您当前浏览器不支持canvas标签...
+		</canvas>		
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			//获取画布对象
+			var canvas = document.getElementById("canvas");
+			//画布的上下文
+			var context = canvas.getContext("2d");
+			
+			//绘画
+			//arc(x,y,radius,startAngle,endAngle,arrow);
+			/*
+				x和y，圆心点的坐标
+				radius:半径
+				start:圆的起点位置
+				end:圆的终点位置
+				arrow的值true/false,默认就是false代表是顺时针方向旋转
+
+
+				//一个圆是360°,angle是角度它是数学里面概念，在程序开发中是没有角度的概念，只有弧度的概念
+				//一个周长公式是:=πr π=3.14
+			*/
+			var w = canvas.width;
+			var h = canvas.height;
+			var degree = 1;
+			function draw(){
+				//清除画布
+				context.clearRect(0,0,w,h);
+				//开始绘画
+				context.beginPath();
+				//设置圆的边框lineWidth默认是1
+				context.lineWidth = 30;
+				//描边的颜色
+				context.strokeStyle="red";//当做border fillStyle当做background 对应方法fill()
+				//绘制圆
+				context.arc(w/2,h/2,130,0,2*Math.PI,false);
+				//绘制画布中
+				context.stroke();//相当于border:20px solid red;
+
+				//弧度
+				var r = degree * 3.6/180*Math.PI;
+				//开始绘画
+				context.beginPath();
+				//设置圆的边框 lineWidth默认是1
+				context.lineWidth = 30;
+				//描边的颜色
+				context.strokeStyle="green";
+				//绘制圆
+				context.arc(w/2,h/2,130,0-Math.PI/2,r-Math.PI/2,false);
+				//width:300px;height:300px;border-radius:50%;border:20px solid red;
+				//绘制画布中
+				context.stroke();
+
+				//绘制文字 fillText(str,x,y)
+				context.beginPath();
+				//设置文字颜色
+				context.fillStyle = "red";
+				//设置字体
+				context.font = "18px 微软雅黑";
+				//360,每一度是3.6
+				var text = degree + "%";
+				//拿到文字的宽度
+				var textWidth = context.measureText(text).width;
+				context.fillText(text,w/2-textWidth/2,h/2+9);
+			};
+			setInterval(function(){
+				degree++;
+				if(degree>100)degree=0;
+				draw();
+			},100);
+		};
+</script>
+ </body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+	<head>
+		<!--声明当前页面编码集(中文编码<gbk,gb2312>,国际编码<utf-8>)-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="keywords" content="关键词,关键词">
+		<meta name="description" content="">
+		<title> html </title>
+        <style type="text/css">
+			*{padding:0px;margin:0px;}
+			ul li{list-style:none;}
+			body{background:
+				linear-gradient(135deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
+				linear-gradient(225deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
+				background-color:#708090;
+				background-size: 64px 128px}
+			/*container start*/
+			#container{width:730px;height:454px;margin:50px auto;position:relative;box-shadow:0 0 10em pink;}
+			#container .pic ul li{position:absolute;display:none;}
+		
+			#container .tab ul{width:140px;position:absolute;bottom:10px;left:50%;margin-left:-70px;}
+			#container .tab ul li{width:18px;height:18px;background:gray;float:left;margin:2px;border-radius:50%;text-align:center;line-height:18px;color:#fff;cursor:pointer;}
+			#container .tab ul li.on{background:#b61b1f;}
+
+			#container .btn div{width:30px;height:60px;background:rgba(0,0,0,0.3);position:absolute;color:#fff;font-size:26px;text-align:center;line-height:60px;top:50%;margin-top:-30px;cursor:pointer;display:none;}
+			#leftBtn{left:0;}
+			#rightBtn{right:0;}
+			
+			/*container end*/
+		</style>
+	</head>
+<body>
+	<!--container start-->
+	<div id="container">
+		<div class="pic">
+			<ul>
+				<li style="display:block;"><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/3.jpg"/></li>
+				<li><img src="img/4.jpg"/></li>
+				<li><img src="img/5.jpg"/></li>
+				<li><img src="img/6.jpg"/></li>
+			</ul>
+		</div>
+		<div class="tab">
+			<ul>
+				<li class="on">1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li>
+			</ul>
+		</div>
+		<div class="btn">
+			<div id="leftBtn">&lt;</div>
+			<div id="rightBtn">&gt;</div>
+		</div>
+	</div>
+	<!--container end-->
+
+	<!--引入js官方类库jQuery-->
+	<script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $tabli = $("#container .tab ul li");
+			var $picli = $("#container .pic ul li");
+			var $container = $("#container");
+			var $btnDiv = $("#container .btn div");
+			var index = 0;
+			var timer = null;
+			$tabli.mouseover(function(){
+				index = $(this).index();
+				fn();
+			});
+			
+			//鼠标移入到container中
+			$container.hover(function(){
+				$btnDiv.show();
+				clearInterval(timer);
+			},function(){
+				$btnDiv.hide();
+				auto();
+			});
+
+			//鼠标点击btnDiv
+			$btnDiv.click(function(){
+				var i = $(this).index();
+				if(i){//1代表true -->右边
+					index++;
+					index %= $tabli.length;//6
+				}else{//0代表假 falsely  0 '' "" undefined null NaN 
+					index--;
+					if(index<0)index = $tabli.length-1;
+				}
+				fn();
+			}).mousedown(function(){
+				return false;
+			});
+
+			//设置定时器
+			auto();
+			function auto(){
+				timer = setInterval(function(){
+					index++;
+					index %= $tabli.length;
+					fn();
+				},1500);
+			}
+
+			//封装一下共用方法
+			function fn(){
+				$tabli.eq(index).addClass("on").siblings().removeClass("on");
+				$picli.eq(index).stop(true).fadeIn("slow").siblings().stop(true).fadeOut("slow");
+			}
+		});
+	</script>
+</body>
+
+</html>

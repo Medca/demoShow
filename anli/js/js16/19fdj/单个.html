@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title></title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+<style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";background:#333;}
+	a{text-decoration:none;color:#3333}
+	#imgbox{height:180px;width:180px;background:#fff;position:absolute;top:100px;left:100px;margin:10px;overflow:hidden;}
+	#imgbox span{width:100px;height:100px;background:red;display:block;position:absolute;top:0;left:0;
+		opacity:0.5;
+		filter:alpha(opacity=50);
+		display:none;
+	}
+	#mark{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;filter:alpha(opacity=0);cursor:move;}
+	#maxImgbox{width:500px;height:500px;position:absolute;top:110px;left:300px;background:red;overflow:hidden;display:none;}
+	#maxImgbox img{position:absolute;top:0;left:0}
+
+  </style>
+ </head>
+ <body>
+
+	<div id="imgbox">
+		<img src="http://img13.360buyimg.com/n1/jfs/t2029/300/648214297/246948/e2032999/561f1f2fN9b6d042b.jpg" width="180" height="180"/>
+		<span></span>
+		<div id="mark"></div>
+	</div>
+
+	<div id="maxImgbox">
+		<img id="maxImg"src="http://img13.360buyimg.com/n0/jfs/t2029/300/648214297/246948/e2032999/561f1f2fN9b6d042b.jpg">
+	</div>
+  <script>
+	/*
+		放大镜：
+		1:准备两个图片的一个大图片，一个小图片.最好等比例的
+		2:定义拖拽层
+		3:box绑定onmouseover(鼠标进入) 和onmouseout(鼠标离开)事件
+		4:实现层的拖拽中心点的问题和层闪动的问题
+		5:通过拖拽求出放大的x,y比例
+		6:用x,y比例计算出大图要便宜的位置。
+		7:看效果
+
+		类似延伸技术：自定义滚动条。
+	*/
+
+	function dom(id){
+		return document.getElementById(id);
+	};
+	
+	window.onload = function(){
+		var boxDom = dom("imgbox");
+		var spanDom = boxDom.children[1];
+
+		//大图层
+		var imgDom = dom("maxImg");
+		var maxBoxDom = dom("maxImgbox");
+
+		//鼠标进入层，拖拽层显示
+
+		boxDom.onmouseover = function(){
+			spanDom.style.display = "block";
+			maxBoxDom.style.display = "block";
+		};
+		
+		//鼠标离开的时候触发拖拽层隐藏
+		boxDom.onmouseout = function(){
+			spanDom.style.display = "none";
+			maxBoxDom.style.display = "none";
+		};
+
+
+		boxDom.onmousemove = function(e){
+			var ev = e || window.event;
+			var x = (ev.clientX || ev.pageX) - this.offsetLeft;
+			var y = (ev.clientY || ev.pageY) - this.offsetTop;
+			//坐标赋予拖拽层
+			var cleft = x - spanDom.offsetWidth/2;
+			var ctop = y -spanDom.offsetHeight/2;
+			//最大移动位置 boxDom的宽度减去拖拽层的宽度计算得来，高度同理.
+			var maxLeft = this.offsetWidth - spanDom.offsetWidth;
+			var maxTop = this.offsetHeight - spanDom.offsetHeight;
+			//拖拽层边界的判断
+			//上边界
+			if(cleft<0)cleft=0;
+			if(ctop<0)ctop=0;
+			//下边界
+			if(cleft>maxLeft)cleft = maxLeft;
+			if(ctop>maxTop)ctop = maxTop;
+			//改变拖拽层的位置
+			spanDom.style.left = cleft+"px";
+			spanDom.style.top = ctop+"px";
+
+			//拖拽层移动的比例
+			var sbit = cleft / maxLeft;
+			var ybit = ctop / maxTop;
+			//拖过图片层减去父元素maxImgbox的宽度，因为要把图片限制在可视区域中
+			var sleft = (imgDom.offsetWidth-imgDom.parentElement.offsetWidth) * sbit*-1;
+			var stop= (imgDom.offsetHeight-imgDom.parentElement.offsetHeight) *ybit*-1;
+			//赋予图片位置
+			imgDom.style.top = stop+"px";
+			imgDom.style.left = sleft+"px";
+
+		};
+	};
+  </script>
+ </body>
+</html>

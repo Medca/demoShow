@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>用 Canvas 编织璀璨星空图</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas height="620" width="1360" id="canvas" style="position: absolute; height: 100%;" />
+
+		<script type="text/javascript">
+			/**
+			 * 分析
+
+				首先我们看看这个效果具体有那些要点。首先，这么炫酷的效果肯定是要用到 Canvas 了，每个星星可以看作为一个粒子，
+				因此，整个效果实际上就是粒子系统了。此外，我们可以发现每个粒子之间是相互连接的，只不过离的近的粒子之间的连线较粗且透明度较低，而离的远的则相反。
+
+			 */
+		
+			
+			(function() {
+				//1得到canvas 并得到绘制上下文
+				var canvasEl = document.getElementById('canvas');
+				var ctx = canvasEl.getContext('2d');
+				var mousePos = [0, 0];
+				var easingFactor = 5.0;
+				var backgroundColor = '#000';
+				var nodeColor = '#fff';
+				var edgeColor = '#fff';
+				//2声明两个变量，分别用于存储“星星”和边
+				var nodes = [];
+				var edges = [];
+				
+				//5随机创建几个点，我们用字典对象的方式存储这些点的各个信息
+				function constructNodes() {
+					for (var i = 0; i < 100; i++) {
+						var node = {
+							//这个点的位置不会被粒子系统管理，也不会绘制出来，但是它会与其他点连线，这样就实现了鼠标跟随的效果了。
+							drivenByMouse: i == 0,
+							x: Math.random() * canvasEl.width,
+							y: Math.random() * canvasEl.height,
+							vx: Math.random() * 1 - 0.5,
+							vy: Math.random() * 1 - 0.5,
+							//我希望让绝大部分点都是小半径的，而极少数的点半径比较大，所以我这里用了一点小 tricky，就是用概率控制点的半径取值，不断调整这个概率阈值就能获取期待的半径随机分布。
+							radius: Math.random() > 0.9 ? 3 + Math.random() * 3 : 1 + Math.random() * 3
+						};
+						nodes.push(node);
+					}
+					//6我们用到双重遍历，把两个点捆绑成一组，放到 edges 数组中
+					/**
+					 * 注意这里我用了另外一个函数来完成这件事，而没有直接用 edges.push() ，为什么？
+						假设我们之前连接了 A、B两点，也就是外侧循环是A，内侧循环是B，那么在下一次循环中，外侧为B，内侧为A，是不是也会创建一条边呢？
+						而实际上，这两个边除了方向不一样以外是完全一样的，这完全没有必要而且占用资源。因此我们在 addEdge 函数中进行一个判断
+					 */
+					nodes.forEach(function(e) {
+						nodes.forEach(function(e2) {
+							if (e == e2) {
+								return;
+							}
+							var edge = {
+								from: e,
+								to: e2
+							}
+							addEdge(edge);
+						});
+					});
+				}
+
+				function addEdge(edge) {
+					var ignore = false;
+					edges.forEach(function(e) {
+						if (e.from == edge.from && e.to == edge.to) {
+							ignore = true;
+						}
+						if (e.to == edge.from && e.from == edge.to) {
+							ignore = true;
+						}
+					});
+					if (!ignore) {
+						edges.push(edge);
+					}
+				}
+				
+				//7让点动起来
+				/**
+				 * 是粒子系统的核心，就是遍历粒子，并且更新其状态。更新的公式就是
+
+					v = v + a
+					s = s + v
+					
+					a是加速度，v是速度，s是位移。由于我们这里不涉及加速度，所以就不写了。
+					然后我们需要作一个边缘的碰撞检测，不然我们的“星星”都无拘无束地一点点飞～走～了～。
+					边缘碰撞后的处理方式就是让速度矢量反转，这样粒子就会“掉头”回来。
+				 */
+				function step() {
+					nodes.forEach(function(e) {
+						if (e.drivenByMouse) {
+							return;
+						}
+						e.x += e.vx;
+						e.y += e.vy;
+
+						function clamp(min, max, value) {
+							if (value > max) {
+								return max;
+							} else if (value < min) {
+								return min;
+							} else {
+								return value;
+							}
+						}
+						if (e.x <= 0 || e.x >= canvasEl.width) {
+							e.vx *= -1;
+							e.x = clamp(0, canvasEl.width, e.x)
+						}
+						if (e.y <= 0 || e.y >= canvasEl.height) {
+							e.vy *= -1;
+							e.y = clamp(0, canvasEl.height, e.y)
+						}
+					});
+					adjustNodeDrivenByMouse();
+					render();
+					window.requestAnimationFrame(step);
+				}
+
+				function adjustNodeDrivenByMouse() {
+					nodes[0].x += (mousePos[0] - nodes[0].x) / easingFactor;
+					nodes[0].y += (mousePos[1] - nodes[0].y) / easingFactor;
+				}
+
+				function lengthOfEdge(edge) {
+					return Math.sqrt(Math.pow((edge.from.x - edge.to.x), 2) + Math.pow((edge.from.y - edge.to.y), 2));
+				}
+				
+				//8绘制
+				//让整个粒子系统连续地运转起来
+				//使用 requestAnimationFrame，它能保证你的帧率锁定在
+				function render() {
+					ctx.fillStyle = backgroundColor;
+					ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
+					edges.forEach(function(e) {
+						var l = lengthOfEdge(e);
+						var threshold = canvasEl.width / 8;
+						if (l > threshold) {
+							return;
+						}
+						ctx.strokeStyle = edgeColor;
+						ctx.lineWidth = (1.0 - l / threshold) * 2.5;
+						ctx.globalAlpha = 1.0 - l / threshold;
+						ctx.beginPath();
+						ctx.moveTo(e.from.x, e.from.y);
+						ctx.lineTo(e.to.x, e.to.y);
+						ctx.stroke();
+					});
+					ctx.globalAlpha = 1.0;
+					nodes.forEach(function(e) {
+						if (e.drivenByMouse) {
+							return;
+						}
+						ctx.fillStyle = nodeColor;
+						ctx.beginPath();
+						ctx.arc(e.x, e.y, e.radius, 0, 2 * Math.PI);
+						ctx.fill();
+					});
+				}
+				//3让画布在窗口大小发生变化时重新绘制，并且调整自身分辨率
+				window.onresize = function() {
+					canvasEl.width = document.body.clientWidth;
+					canvasEl.height = canvasEl.clientHeight;
+					if (nodes.length == 0) {
+						constructNodes();
+					}
+					render();
+				};
+				window.onmousemove = function(e) {
+					mousePos[0] = e.clientX;
+					mousePos[1] = e.clientY;
+				}
+				window.onresize(); // trigger the event manually.
+				window.requestAnimationFrame(step);
+			}).call(this);
+			
+			/**
+			 * 常规的 Canvas 绘图操作，注意 beginPath 一定要调用，不然你的线就全部穿在一起了… 
+			 * 需要说明的是，在绘制边的时候，我们先要计算两点距离，然后根据一个阈值来判断是否要绘制这条边，这样我们才能实现距离远的点之间连线不可见的效果。
+			 */
+		</script>
+	</body>
+
+</html>

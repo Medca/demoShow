@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+	 <head>
+		  <!--声明当前页面的编码级：charset=gbk,gb2312(中文编码)，utf-8国际编码-->   
+		  <meta http-equiv="Content-Type" content="Text/html;" charset="UTF-8">
+		  <!--当前页面的三要素-->
+		  <title></title>
+		  <meta name="Keywords" content="关键词,关键词">
+		  <meta name="Description" content="">
+		  
+		  <!--css,js-->
+		  <style class="text/css">
+				*{padding:0;margin:0}
+				body{font-size:14px;font-family:"微软雅黑";}
+				a{text-decoration:none;color:#3333}
+				.box{position:absolute;top:0;left:0;width:100px;height:100px;background:red;font-size:12px;color:#fff;line-height:100px;text-align:center;}
+
+		  </style>
+	 </head>
+ <body>
+	<div id="box" class="box">1随意拖拽</div>
+	<div id="box1" class="box" style="background:green">2横向拖</div>
+	
+	<div id="box2" class="box" style="background:pink">3纵向拖</div>
+	<div id="box3" class="box" style="background:#111">4镜像拖</div>
+	<div id="box4" class="box" style="background:gray">5执行回调函数改变yellow</div>
+	
+	<script type="text/javascript" src="dom.js"></script>
+	<script>
+
+  	function dom(id){
+		return document.getElementById(id);
+	};
+
+	window.onload = function(){
+		var drag = new Drag();
+		drag.init({id:"box"});
+
+
+		var drag1 = new Drag();
+		drag1.init({id:"box1"});
+
+
+		var drag2 = new Drag();
+		drag2.init({id:"box2",arrow:"left"});
+
+
+		var drag3 = new Drag();
+		drag3.init({id:"box3","arrow":"top"});
+
+
+		var drag4 = new Drag();
+		drag4.init({id:"box4",callback:function(){
+			this.style.background = "yellow";	
+		}});
+		
+	};
+
+	//拖拽的构造函数
+	function Drag(){
+	}
+
+	Drag.prototype.init = function(options){
+		//参数的混入 jquery $.extend
+		var opts = mix({},{arrow:""},options);
+		var boxDom = dom(opts.id);
+		var mark  = false;
+		boxDom.onmousedown = function(e){
+			var mark = false;
+			var sleft = this.offsetLeft;
+			var stop = this.offsetTop;
+			var maxLeft = window.innerWidth - this.offsetWidth;
+			var maxTop = window.innerHeight - this.offsetHeight;
+			var pos = getXY(e);
+			mark = true;
+			document.onmousemove = function(e){
+				if(mark){
+					var pos2 = getXY(e);
+					var nleft = pos2.x - pos.x+sleft;
+					var ntop = pos2.y - pos.y+stop;
+
+					if(nleft<0)nleft=0;
+					if(ntop<0)ntop=0;
+					if(nleft>maxLeft)nleft=maxLeft;
+					if(ntop>maxTop)ntop=maxTop;
+					
+					//改变位置
+					if(opts.arrow=="left"){
+						boxDom.style.left = nleft+"px";
+					}else if(opts.arrow=="top"){
+						boxDom.style.top = ntop+"px";
+					}else{
+						boxDom.style.left = nleft+"px";
+						boxDom.style.top = ntop+"px";
+					}
+
+				}
+			};
+			document.onmouseup = function(){
+				this.onmousemove = null;
+				this.onmouseup = null;
+				mark = false;
+				if(opts.callback)opts.callback.call(boxDom);
+			};
+		};
+	};
+	
+
+	//获取鼠标的位置。兼容ie678
+	function getXY(e){
+		var ev = e || window.event;
+		var x=0,y=0;
+		if(ev.pageX){
+			x = ev.pageX;
+			y = ev.pageY;
+		}else{
+			//拿到scrollTop 和scrollLeft
+			var sleft = 0,stop = 0;
+			//ie678---
+			if(document.documentElement){
+				stop =document.documentElement.scrollTop;
+				sleft = document.documentElement.scrollLeft;
+			}else{
+			//ie9+ 谷歌 
+				stop = document.body.scrollTop;
+				sleft = document.body.scrollLeft;
+			}	
+			x = ev.clientX + sleft;
+			y = ev.clientY + stop;
+		}
+		return {x:x,y:y};
+	};
+
+  </script>
+ </body>
+</html>
